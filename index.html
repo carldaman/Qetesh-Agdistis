@@ -1,12 +1,36 @@
- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<h1>Hello Carl</h1>
-<p>Hello Katy.</p>
-
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="albums.html">Photo Albums</a></li>
+                <li><a href="links.html">Links</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Content specific to each page will go here -->
+        <h1>Welcome to My Website</h1>
+        <div id="latest-photos">
+            <!-- Embed latest photos from imgbb -->
+            <img src="https://ibb.co/photo1" alt="Latest Photo 1">
+            <img src="https://ibb.co/photo2" alt="Latest Photo 2">
+        </div>
+    </main>
+    <footer>
+        <p>Contact us: email@example.com</p>
+        <p>Follow us on <a href="https://twitter.com">Twitter</a>, <a href="https://facebook.com">Facebook</a></p>
+    </footer>
 </body>
-</html> 
+</html>
