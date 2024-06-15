@@ -25,25 +25,39 @@
         </div>
     </header>
     <main>
-        <section class="album">
-            <h2>Blue Swimsuit</h2>
-            <div class="sub-albums">
-                <div class="sub-album">
-                    <a href="blue-swimsuit-album-1.html">
-                        <img src="https://i.ibb.co/example-image.jpg" alt="Blue Swimsuit Album 1">
-                        <h3>Blue Swimsuit Album 1</h3>
-                    </a>
-                </div>
-                <div class="sub-album">
-                    <a href="blue-swimsuit-album-2.html">
-                        <img src="https://i.ibb.co/example-image.jpg" alt="Blue Swimsuit Album 2">
-                        <h3>Blue Swimsuit Album 2</h3>
-                    </a>
-                </div>
+        <section class="albums">
+            <h2>Albums</h2>
+            <div class="album">
+                <a href="#" onclick="openAlbum('blue-swimsuit')">
+                    <img src="https://i.ibb.co/example-image.jpg" alt="Blue Swimsuit">
+                    <h3>Blue Swimsuit</h3>
+                </a>
             </div>
+            <!-- Add more albums as needed -->
         </section>
     </main>
     <footer>
+        <p>&copy; 2024 My Photo Gallery</p>
+    </footer>
+
+    <!-- Album Modal -->
+    <div id="album-modal" class="modal">
+        <span class="close" onclick="closeAlbum()">&times;</span>
+        <div class="modal-content">
+            <img id="modal-image" src="" alt="">
+            <div class="modal-caption">
+                <span id="modal-caption"></span>
+                <span id="modal-counter"></span>
+            </div>
+            <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+            <a class="next" onclick="changeImage(1)">&#10095;</a>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+
         <p>&copy; 2024 My Photo Gallery</p>
     </footer>
 </body>
