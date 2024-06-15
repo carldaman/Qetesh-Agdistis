@@ -23,7 +23,7 @@ header {
 }
 
 .logo img {
-    height: 50px; /* Adjust size as needed */
+    height: 50px;
 }
 
 header h1 {
@@ -76,13 +76,21 @@ footer p {
     text-align: center;
 }
 
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
 .album {
-    display: inline-block;
-    margin: 1rem;
+    width: 200px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .album img {
-    width: 200px; /* Adjust size as needed */
+    width: 100%;
     height: auto;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -114,16 +122,19 @@ footer p {
 .modal-content {
     position: relative;
     margin: auto;
-    padding: 0;
+    padding: 1rem;
     width: 80%;
-    max-width: 700px;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .close {
     position: absolute;
     top: 15px;
     right: 35px;
-    color: #fff;
+    color: #000;
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
@@ -136,48 +147,37 @@ footer p {
     cursor: pointer;
 }
 
-.modal img {
-    margin: auto;
-    display: block;
-    width: 100%;
-    max-width: 700px;
-}
-
-.modal-caption {
-    margin: auto;
+.modal-header, .modal-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
-    max-width: 700px;
-    padding: 10px;
-    color: #ccc;
+}
+
+.modal-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-body img {
+    width: calc(20% - 1rem);
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
 .prev, .next {
     cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
     padding: 16px;
-    margin-top: -22px;
-    color: white;
+    color: #333;
     font-weight: bold;
     font-size: 20px;
     transition: 0.3s;
-    border-radius: 0 3px 3px 0;
     user-select: none;
 }
 
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
 .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-}
-
-.links-section ul li a:hover {
-    text-decoration: underline;
+    background-color: #ddd;
+    border-radius: 8px;
 }
