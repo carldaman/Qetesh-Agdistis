@@ -29,11 +29,26 @@
             <h2>Albums</h2>
             <div class="album-grid">
                 <!-- Example Album -->
-                <div class="album" onclick="openAlbum('album1')">
-                    <img src="https://i.ibb.co/example1.jpg" alt="Album 1">
-                    <h3>Album 1</h3>
+                <div class="album">
+                    <a href="album1.html">
+                        <img src="https://i.ibb.co/example1-thumb.jpg" alt="Album 1">
+                    </a>
+                    <h3><a href="album1.html">Album 1</a></h3>
                 </div>
                 <!-- Add more albums here -->
+                <div class="album">
+                    <a href="album2.html">
+                        <img src="https://i.ibb.co/example2-thumb.jpg" alt="Album 2">
+                    </a>
+                    <h3><a href="album2.html">Album 2</a></h3>
+                </div>
+                <div class="album">
+                    <a href="album3.html">
+                        <img src="https://i.ibb.co/example3-thumb.jpg" alt="Album 3">
+                    </a>
+                    <h3><a href="album3.html">Album 3</a></h3>
+                </div>
+                <!-- Repeat for other albums -->
             </div>
         </section>
     </main>
@@ -41,31 +56,7 @@
         <p>&copy; 2024 My Photo Gallery</p>
     </footer>
 
-    <!-- Album Modal -->
-    <div id="album-modal" class="modal">
-        <span class="close" onclick="closeAlbum()">&times;</span>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="album-title"></h2>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Photos will be injected here -->
-            </div>
-            <div class="modal-footer">
-                <span id="modal-counter"></span>
-                <a class="prev" onclick="changeSet(-1)">&#10094; Prev</a>
-                <a class="next" onclick="changeSet(1)">Next &#10095;</a>
-            </div>
-        </div>
-    </div>
-
     <script src="scripts.js"></script>
-</body>
-</html>
-
-
-        <p>&copy; 2024 My Photo Gallery</p>
-    </footer>
 </body>
 </html>
 
