@@ -32,12 +32,16 @@ header h1 {
     margin: 0;
 }
 
+header nav {
+    flex-grow: 2;
+}
+
 header nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 header nav ul li {
@@ -47,10 +51,12 @@ header nav ul li {
 header nav ul li a {
     color: white;
     text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
 header nav ul li a:hover {
-    text-decoration: underline;
+    color: #ddd;
 }
 
 main {
@@ -71,22 +77,19 @@ footer p {
     margin: 0;
 }
 
-/* Album Styles */
+/* Albums Page Styles */
 .albums {
     text-align: center;
 }
 
 .album-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
 }
 
 .album {
-    width: 200px;
-    cursor: pointer;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
 .album img {
@@ -94,7 +97,7 @@ footer p {
     height: auto;
     border: 1px solid #ccc;
     border-radius: 8px;
-    transition: transform 0.2s;
+    transition: transform 0.2s ease;
 }
 
 .album img:hover {
@@ -103,81 +106,63 @@ footer p {
 
 .album h3 {
     margin-top: 0.5rem;
+    font-size: 18px;
 }
 
-/* Modal Styles */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.9); 
-}
-
-.modal-content {
-    position: relative;
-    margin: auto;
-    padding: 1rem;
-    width: 80%;
+/* Individual Album Page Styles */
+.album {
     max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #000;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
+.album h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
+.album-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-.modal-header, .modal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-body {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.modal-body img {
-    width: calc(20% - 1rem);
+.album-photos img {
+    width: 100%;
     height: auto;
     border: 1px solid #ccc;
     border-radius: 8px;
+    transition: transform 0.2s ease;
 }
 
-.prev, .next {
-    cursor: pointer;
-    padding: 16px;
-    color: #333;
-    font-weight: bold;
-    font-size: 20px;
-    transition: 0.3s;
-    user-select: none;
+.album-photos img:hover {
+    transform: scale(1.05);
 }
 
-.prev:hover, .next:hover {
-    background-color: #ddd;
-    border-radius: 8px;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul {
+        margin-top: 10px;
+    }
+
+    header nav ul li {
+        margin: 0 10px;
+    }
+
+    .album-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .album {
+        margin-bottom: 10px;
+    }
 }
+
