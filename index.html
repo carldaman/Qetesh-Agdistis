@@ -3,31 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Photo Gallery</title>
+    <title>Age Verification - My Photo Gallery</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+        }
+        .container {
+            text-align: center;
+        }
+        .container img {
+            width: 100px;
+            height: auto;
+        }
+        .container button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #555;
+            color: white;
+        }
+        .container button:hover {
+            background-color: #777;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Qetesh-Agdistis</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="albums.html">Albums</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="links.html">Links</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>Featured Album</h2>
-            <p>Check out the latest photos from my recent travels!</p>
-            <a href="albums.html">View Albums</a>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Qetesh-Agdistis</p>
-    </footer>
+    <div class="container">
+        <img src="https://i.ibb.co/YbZXD7T/no-entry-18.png" alt="No Entry 18">
+        <h1>Warning: You Must Be 18 or Older to Enter</h1>
+        <p>This site contains content that is only suitable for individuals 18 years or older.</p>
+        <button onclick="enterSite()">Yes, I am 18 or older</button>
+        <button onclick="redirectGoogle()">No, take me to Google</button>
+    </div>
+
+    <script>
+        function enterSite() {
+            window.location.href = 'home.html';  // Replace with the actual home page URL
+        }
+
+        function redirectGoogle() {
+            window.location.href = 'https://www.google.com';
+        }
+    </script>
 </body>
 </html>
+
