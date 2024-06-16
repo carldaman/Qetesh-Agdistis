@@ -44,11 +44,18 @@
         .album-photos {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .album-photos img {
             margin: 5px;
             width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .album-photos img:hover {
+            transform: scale(1.1);
         }
 
         .toolbar {
@@ -176,39 +183,45 @@
             'https://i.ibb.co/d4KPK1v/Realise-Swimsuit-Sleeveless-S1-68.jpg'
         ];
 
-        let currentPage = 1;
-        const photosPerPage = 5;
+    let currentPage = 1;
+    const photosPerPage = 12; // Adjusted to show more photos per page for better browsing
 
-        function displayPhotos() {
-            const albumPhotos = document.getElementById('album-photos');
-            albumPhotos.innerHTML = '';
-            const start = (currentPage - 1) * photosPerPage;
-            const end = start + photosPerPage;
-            const currentPhotos = photos.slice(start, end);
+    function displayPhotos() {
+        const albumPhotos = document.getElementById('album-photos');
+        albumPhotos.innerHTML = '';
+        const start = (currentPage - 1) * photosPerPage;
+        const end = start + photosPerPage;
+        const currentPhotos = photos.slice(start, end);
 
-            currentPhotos.forEach(photo => {
-                const img = document.createElement('img');
-                img.src = photo;
-                albumPhotos.appendChild(img);
-            });
+        currentPhotos.forEach(photo => {
+            const img = document.createElement('img');
+            img.src = photo;
+            img.onclick = function() {
+                openPhoto(photo);
+            };
+            albumPhotos.appendChild(img);
+        });
+    }
+
+    function openPhoto(photoUrl) {
+        window.open(photoUrl, '_blank');
+    }
+
+    function nextPage() {
+        if (currentPage * photosPerPage < photos.length) {
+            currentPage++;
+            displayPhotos();
         }
+    }
 
-        function nextPage() {
-            if (currentPage * photosPerPage < photos.length) {
-                currentPage++;
-                displayPhotos();
-            }
+    function previousPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayPhotos();
         }
+    }
 
-        function previousPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                displayPhotos();
-            }
-        }
-
-        // Initial display
-        displayPhotos();
-    </script>
-</body>
+    // Initial display
+    displayPhotos();
+</script>
 </html>
