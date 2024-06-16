@@ -191,23 +191,39 @@
             'https://i.ibb.co/d4KPK1v/Realise-Swimsuit-Sleeveless-S1-68.jpg'
         ];
 
- let currentPhotoIndex = 0;
+        let currentPage = 1;
+        const photosPerPage = 5;
 
         function displayPhotos() {
             const albumPhotos = document.getElementById('album-photos');
             albumPhotos.innerHTML = '';
-            photos.forEach((photoUrl, index) => {
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach((photo, index) => {
                 const img = document.createElement('img');
-                img.src = photoUrl;
-                img.onclick = function() {
-                    openLightbox(index);
-                };
+                img.src = photo;
+                img.addEventListener('click', () => openLightbox(index + start));
                 albumPhotos.appendChild(img);
             });
         }
 
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
         function openLightbox(index) {
-            currentPhotoIndex = index;
             const lightbox = document.getElementById('lightbox');
             const lightboxImage = document.getElementById('lightbox-image');
             lightboxImage.src = photos[index];
@@ -218,29 +234,6 @@
             const lightbox = document.getElementById('lightbox');
             lightbox.style.display = 'none';
         }
-
-        function nextPhoto() {
-            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
-            const lightboxImage = document.getElementById('lightbox-image');
-            lightboxImage.src = photos[currentPhotoIndex];
-        }
-
-        function previousPhoto() {
-            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
-            const lightboxImage = document.getElementById('lightbox-image');
-            lightboxImage.src = photos[currentPhotoIndex];
-        }
-
-        // Keyboard navigation for lightbox
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowLeft') {
-                previousPhoto();
-            } else if (event.key === 'ArrowRight') {
-                nextPhoto();
-            } else if (event.key === 'Escape') {
-                closeLightbox();
-            }
-        });
 
         // Initial display
         displayPhotos();
