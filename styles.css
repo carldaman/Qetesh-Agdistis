@@ -84,7 +84,7 @@ footer p {
 
 .album-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1000px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Change this line */
     gap: 1rem;
 }
 
@@ -94,7 +94,7 @@ footer p {
 
 .album img {
     width: 100%;
-    max-width: 150px;
+    max-width: 150px; /* Add this line to limit the size */
     height: auto;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -159,11 +159,10 @@ footer p {
     }
 
     .album-grid {
-        grid-template-columns: repeat(auto-fit, minmax(75x, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Change this line */
     }
 
     .album {
         margin-bottom: 10px;
     }
 }
-
