@@ -44,36 +44,40 @@
         .album-photos {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
         }
 
         .album-photos img {
             margin: 5px;
             width: calc(20% - 10px); /* Adjust as necessary */
             cursor: pointer;
-            transition: transform 0.2s ease-in-out;
         }
 
-        .album-photos img:hover {
-            transform: scale(1.1);
-        }
-
-        .toolbar {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .toolbar button {
-            margin: 5px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #f8f8f8;
+        .lightbox {
+            display: none;
             position: fixed;
-            bottom: 0;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -107,6 +111,10 @@
             </div>
         </section>
     </main>
+    <div class="lightbox" id="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-image">
+    </div>
     <footer>
         <p>&copy; 2024 Qetesh Agdistis</p>
     </footer>
@@ -183,45 +191,59 @@
             'https://i.ibb.co/d4KPK1v/Realise-Swimsuit-Sleeveless-S1-68.jpg'
         ];
 
-    let currentPage = 1;
-    const photosPerPage = 12; // Adjusted to show more photos per page for better browsing
+ let currentPhotoIndex = 0;
 
-    function displayPhotos() {
-        const albumPhotos = document.getElementById('album-photos');
-        albumPhotos.innerHTML = '';
-        const start = (currentPage - 1) * photosPerPage;
-        const end = start + photosPerPage;
-        const currentPhotos = photos.slice(start, end);
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            photos.forEach((photoUrl, index) => {
+                const img = document.createElement('img');
+                img.src = photoUrl;
+                img.onclick = function() {
+                    openLightbox(index);
+                };
+                albumPhotos.appendChild(img);
+            });
+        }
 
-        currentPhotos.forEach(photo => {
-            const img = document.createElement('img');
-            img.src = photo;
-            img.onclick = function() {
-                openPhoto(photo);
-            };
-            albumPhotos.appendChild(img);
+        function openLightbox(index) {
+            currentPhotoIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextPhoto() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function previousPhoto() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                previousPhoto();
+            } else if (event.key === 'ArrowRight') {
+                nextPhoto();
+            } else if (event.key === 'Escape') {
+                closeLightbox();
+            }
         });
-    }
 
-    function openPhoto(photoUrl) {
-        window.open(photoUrl, '_blank');
-    }
-
-    function nextPage() {
-        if (currentPage * photosPerPage < photos.length) {
-            currentPage++;
-            displayPhotos();
-        }
-    }
-
-    function previousPage() {
-        if (currentPage > 1) {
-            currentPage--;
-            displayPhotos();
-        }
-    }
-
-    // Initial display
-    displayPhotos();
-</script>
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
 </html>
