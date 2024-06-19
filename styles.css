@@ -81,63 +81,53 @@ footer p {
 .albums-page .albums {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .albums-page .album-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 }
 
 .albums-page .album {
-    flex: 1 1 calc(25% - 40px); /* Adjusts the width of each album to fit 4 in a row */
-    box-sizing: border-box;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .albums-page .album img {
     width: 100%;
     height: auto;
-    max-width: 300px; /* Ensures the image does not exceed 300px in width */
-    display: block;
-    border-radius: 8px; /* Optional: Adds rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.albums-page .album img:hover {
+    transform: scale(1.05);
+}
+
+.albums-page .album h3 {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.albums-page .album h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.albums-page .album h3 a:hover {
+    color: #007BFF;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .albums-page .album {
-        flex: 1 1 calc(50% - 20px); /* Adjusts the width of each album to fit 2 in a row */
-    }
-}
-
-@media (max-width: 480px) {
-    .albums-page .album {
-        flex: 1 1 100%; /* Adjusts the width of each album to fit 1 in a row */
-    }
-}
-
-/* Links Page Styles */
-.link-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.link-list li {
-    margin-bottom: 20px;
-    max-width: 300px; /* Adjust the maximum width of each banner */
-    margin: 0 auto; /* Center-align the banners */
-}
-
-.link-list img {
-    width: 100%;
-    display: block;
-    border-radius: 8px; /* Optional: Adds rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow */
-}
-
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -152,3 +142,10 @@ footer p {
         margin: 0 10px;
     }
 }
+
+@media (max-width: 480px) {
+    .albums-page .album-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
