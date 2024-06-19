@@ -77,6 +77,46 @@ footer p {
     margin: 0;
 }
 
+/* Album Grid Styles */
+.albums {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.album {
+    flex: 1 1 calc(25% - 40px); /* Adjusts the width of each album to fit 4 in a row */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.album img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; /* Optional: Adds rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .album {
+        flex: 1 1 calc(50% - 20px); /* Adjusts the width of each album to fit 2 in a row */
+    }
+}
+
+@media (max-width: 480px) {
+    .album {
+        flex: 1 1 100%; /* Adjusts the width of each album to fit 1 in a row */
+    }
+}
+
 /* Links Page Styles */
 .link-list {
     list-style: none;
