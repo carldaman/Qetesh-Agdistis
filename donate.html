@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Verge</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Your existing styles */
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Your header content -->
+    </header>
+
+    <main>
+        <section class="donation-page">
+            <h2>Donate Verge</h2>
+            <p>Choose an amount to donate:</p>
+            <!-- Donation buttons or input fields -->
+            <button onclick="donate('your_verge_address_here')">Donate 10 XVG</button>
+            <button onclick="donate('your_verge_address_here')">Donate 20 XVG</button>
+            <button onclick="donate('your_verge_address_here')">Donate 50 XVG</button>
+            <!-- Optionally include an input field for custom amount -->
+            <label for="customAmount">Custom Amount (XVG):</label>
+            <input type="text" id="customAmount" placeholder="Enter amount">
+            <button onclick="donateCustom()">Donate Custom Amount</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Website Name</p>
+    </footer>
+
+    <script>
+        function donate(vergeAddress) {
+            // Replace with your donation processing logic, e.g., redirect to Verge wallet URI
+            window.location.href = 'verge:' + vergeAddress;
+        }
+
+        function donateCustom() {
+            var customAmount = document.getElementById('customAmount').value;
+            var vergeAddress = 'your_verge_address_here'; // Replace with your actual Verge address
+            // Replace with your donation processing logic for custom amounts
+            alert('Donating ' + customAmount + ' XVG to ' + vergeAddress);
+        }
+    </script>
+</body>
+</html>
