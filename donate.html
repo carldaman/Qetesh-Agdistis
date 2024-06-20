@@ -14,33 +14,14 @@
             background-color: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 5px;
-        }
-        .donation-page h2 {
-            margin-top: 0;
+            text-align: center; /* Center align content */
         }
         .donation-page p {
             margin-bottom: 20px;
         }
-        .donation-page input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .donation-page button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .donation-page button:hover {
-            background-color: #45a049;
+        .qr-code {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -67,16 +48,12 @@
     <main>
         <section class="donation-page">
             <h2>Donate Verge</h2>
-            <p>Choose an amount to donate:</p>
-            <!-- Donation buttons -->
-            <button onclick="donate('DFBYCsVgEBsifNR9tSk8TEmqCuXz19hB6W', 10)">Donate 10 XVG</button>
-            <button onclick="donate('DFBYCsVgEBsifNR9tSk8TEmqCuXz19hB6W', 20)">Donate 20 XVG</button>
-            <button onclick="donate('DFBYCsVgEBsifNR9tSk8TEmqCuXz19hB6W', 50)">Donate 50 XVG</button>
+            <p>Scan the QR code below to donate:</p>
             
-            <!-- Custom amount donation -->
-            <label for="customAmount">Custom Amount (XVG):</label>
-            <input type="text" id="customAmount" placeholder="Enter amount">
-            <button onclick="donateCustom()">Donate Custom Amount</button>
+            <!-- QR Code Image -->
+            <img src="qr_code.png" alt="Donate QR Code" class="qr-code">
+            
+            <p>Scan this QR code with your Verge wallet to make a donation.</p>
             
             <p>By supporting me, you enable the creation of exciting new content and help cover the costs of swimsuits, leotards, and other clothing. Your generosity also helps pay for web hosting, keeping this website free for everyone to enjoy.</p>
         </section>
@@ -85,38 +62,6 @@
     <footer>
         <p>&copy; 2024 Qetesh-Agdistis</p>
     </footer>
-
-    <script>
-        function donate(vergeAddress, amount) {
-            // Replace with your donation processing logic, e.g., redirect to Verge wallet URI
-            var uri = 'verge:' + vergeAddress + '?amount=' + amount;
-            window.location.href = uri;
-        }
-
-        function donateCustom() {
-            var customAmount = document.getElementById('customAmount').value.trim();
-            var vergeAddress = 'DFBYCsVgEBsifNR9tSk8TEmqCuXz19hB6W'; // Replace with your actual Verge address
-            
-            // Validate custom amount
-            if (customAmount === '') {
-                alert('Please enter a valid amount.');
-                return;
-            }
-            
-            // Perform actual donation processing logic here, e.g., integrate with payment processor or wallet API
-            var amount = parseFloat(customAmount); // Convert to number
-            if (isNaN(amount) || amount <= 0) {
-                alert('Please enter a valid amount.');
-                return;
-            }
-
-            // For demonstration purposes, alert the user with the donation details
-            alert('Donating ' + amount + ' XVG to ' + vergeAddress);
-
-            // Optionally, reset the custom amount input field after donation
-            document.getElementById('customAmount').value = '';
-        }
-    </script>
 </body>
 </html>
 
