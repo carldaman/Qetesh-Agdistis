@@ -49,7 +49,7 @@ function showSet(set) {
         img.src = currentAlbum[i];
         modalBody.appendChild(img);
     }
-    document.getElementById('modal-counter').textContent = `Showing ${start + 1} to ${end} of ${currentAlbum.length}`;
+    document.getElementById('modal-counter').textContent = Showing ${start + 1} to ${end} of ${currentAlbum.length};
 }
 
 document.addEventListener('keydown', function(event) {
@@ -61,40 +61,3 @@ document.addEventListener('keydown', function(event) {
         closeAlbum();
     }
 });
-
-// Function to add a new news item dynamically
-function addNewsItem() {
-    const newsContainer = document.getElementById('news-container');
-
-    // Create a new news item div
-    const newsItem = document.createElement('div');
-    newsItem.className = 'news-item';
-
-    // Example content (you can modify this as per your needs)
-    newsItem.innerHTML = `
-        <h3>New Feature Released!</h3>
-        <p>We are excited to announce the release of our new feature. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac efficitur magna. Nulla facilisi.</p>
-        <p><a href="#">Read more</a></p>
-    `;
-
-    // Append the new news item to the news container
-    newsContainer.appendChild(newsItem);
-}
-
-// Function to add a new image dynamically
-function addImage() {
-    const imagesContainer = document.getElementById('images-container');
-
-    // Create a new image item div
-    const imageItem = document.createElement('div');
-    imageItem.className = 'image-item';
-
-    // Example content (you can modify this as per your needs)
-    imageItem.innerHTML = `
-        <img src="placeholder.png" alt="New Image">
-        <p>Image description goes here. Edit this description as needed.</p>
-    `;
-
-    // Append the new image item to the images container
-    imagesContainer.appendChild(imageItem);
-}
