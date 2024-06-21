@@ -85,3 +85,23 @@ function addImage() {
     `;
     imagesContainer.appendChild(imageItem);
 }
+
+// Function to add a new news item dynamically
+function addNewsItem() {
+    const newsContainer = document.getElementById('news-container');
+
+    // Create a new news item div
+    const newsItem = document.createElement('div');
+    newsItem.className = 'news-item';
+
+    // Example content (you can modify this as per your needs)
+    newsItem.innerHTML = `
+        <h3>New Feature Released!</h3>
+        <p>We are excited to announce the release of our new feature. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac efficitur magna. Nulla facilisi.</p>
+        <p><a href="#">Read more</a></p>
+    `;
+
+    // Append the new news item to the news container
+    newsContainer.appendChild(newsItem);
+}
+
