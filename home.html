@@ -25,35 +25,44 @@
             <a href="donate.html" class="button">Donate</a>
         </div>
     </header>
-    <main>
-        <section>
-            <h2>Featured Album</h2>
-            <p>latest updates and news</p>
-            <a href="albums.html">View Albums</a>
-        </section>
-        
-        <!-- New News Updates Section -->
+
+    <main class="main-content">
         <section id="news-updates">
             <h2>News Updates</h2>
             <div id="news-container">
-                <!-- News items will be dynamically added here -->
+                <div class="news-item">
+                    <h3>News Title 1</h3>
+                    <p>News content goes here. Edit this content as needed.</p>
+                </div>
+
+                <div class="news-item">
+                    <h3>News Title 2</h3>
+                    <p>Another news content goes here. Edit this content as needed.</p>
+                </div>
             </div>
-            <button onclick="addNewsItem()">Add News Item</button>
         </section>
 
-        <!-- New Recently Uploaded Images Section -->
         <section id="recent-uploads">
             <h2>Recently Uploaded Images</h2>
             <div id="images-container">
-                <!-- Images will be dynamically added here -->
+                <div class="image-item">
+                    <img src="example1.jpg" alt="Image 1">
+                    <p>Image description goes here. Edit this description as needed.</p>
+                </div>
+
+                <div class="image-item">
+                    <img src="example2.jpg" alt="Image 2">
+                    <p>Another image description goes here. Edit this description as needed.</p>
+                </div>
             </div>
-            <button onclick="addImage()">Add Image</button>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2024 Qetesh-Agdistis</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Optional: JavaScript file if you have additional scripts -->
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>
