@@ -61,3 +61,27 @@ document.addEventListener('keydown', function(event) {
         closeAlbum();
     }
 });
+
+// Function to add a new news item dynamically
+function addNewsItem() {
+    const newsContainer = document.getElementById('news-container');
+    const newsItem = document.createElement('div');
+    newsItem.className = 'news-item';
+    newsItem.innerHTML = `
+        <h3>News Title</h3>
+        <p>News content goes here. Edit this content as needed.</p>
+    `;
+    newsContainer.appendChild(newsItem);
+}
+
+// Function to add a new image dynamically
+function addImage() {
+    const imagesContainer = document.getElementById('images-container');
+    const imageItem = document.createElement('div');
+    imageItem.className = 'image-item';
+    imageItem.innerHTML = `
+        <img src="placeholder.png" alt="New Image">
+        <p>Image description goes here. Edit this description as needed.</p>
+    `;
+    imagesContainer.appendChild(imageItem);
+}
