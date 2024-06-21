@@ -21,8 +21,8 @@
                 <li><a href="links.html">Links</a></li>
             </ul>
         </nav>
-            <div class="donate-button">
-                <a href="donate.html" class="button">Donate</a>
+        <div class="donate-button">
+            <a href="donate.html" class="button">Donate</a>
         </div>
     </header>
     <main>
@@ -31,9 +31,29 @@
             <p>latest updates and news</p>
             <a href="albums.html">View Albums</a>
         </section>
+        
+        <!-- New News Updates Section -->
+        <section id="news-updates">
+            <h2>News Updates</h2>
+            <div id="news-container">
+                <!-- News items will be dynamically added here -->
+            </div>
+            <button onclick="addNewsItem()">Add News Item</button>
+        </section>
+
+        <!-- New Recently Uploaded Images Section -->
+        <section id="recent-uploads">
+            <h2>Recently Uploaded Images</h2>
+            <div id="images-container">
+                <!-- Images will be dynamically added here -->
+            </div>
+            <button onclick="addImage()">Add Image</button>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 Qetesh-Agdistis</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
