@@ -65,30 +65,6 @@ document.addEventListener('keydown', function(event) {
 // Function to add a new news item dynamically
 function addNewsItem() {
     const newsContainer = document.getElementById('news-container');
-    const newsItem = document.createElement('div');
-    newsItem.className = 'news-item';
-    newsItem.innerHTML = `
-        <h3>News Title</h3>
-        <p>News content goes here. Edit this content as needed.</p>
-    `;
-    newsContainer.appendChild(newsItem);
-}
-
-// Function to add a new image dynamically
-function addImage() {
-    const imagesContainer = document.getElementById('images-container');
-    const imageItem = document.createElement('div');
-    imageItem.className = 'image-item';
-    imageItem.innerHTML = `
-        <img src="placeholder.png" alt="New Image">
-        <p>Image description goes here. Edit this description as needed.</p>
-    `;
-    imagesContainer.appendChild(imageItem);
-}
-
-// Function to add a new news item dynamically
-function addNewsItem() {
-    const newsContainer = document.getElementById('news-container');
 
     // Create a new news item div
     const newsItem = document.createElement('div');
@@ -105,3 +81,20 @@ function addNewsItem() {
     newsContainer.appendChild(newsItem);
 }
 
+// Function to add a new image dynamically
+function addImage() {
+    const imagesContainer = document.getElementById('images-container');
+
+    // Create a new image item div
+    const imageItem = document.createElement('div');
+    imageItem.className = 'image-item';
+
+    // Example content (you can modify this as per your needs)
+    imageItem.innerHTML = `
+        <img src="placeholder.png" alt="New Image">
+        <p>Image description goes here. Edit this description as needed.</p>
+    `;
+
+    // Append the new image item to the images container
+    imagesContainer.appendChild(imageItem);
+}
