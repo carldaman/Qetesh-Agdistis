@@ -149,51 +149,6 @@ footer p {
     color: #007BFF;
 }
 
-/* News Updates Section */
-#news-updates {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.news-item {
-    margin-bottom: 15px;
-}
-
-.news-item h3 {
-    font-size: 18px;
-    color: #007BFF;
-}
-
-.news-item p {
-    color: #555;
-}
-
-/* Recently Uploaded Images Section */
-#recent-uploads {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.image-item {
-    margin-bottom: 15px;
-}
-
-.image-item img {
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.image-item p {
-    color: #555;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .header-content {
@@ -209,21 +164,13 @@ footer p {
         margin: 0 10px;
     }
 
-    .album-grid {
+    .albums-page .album-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-
-    #news-updates, #recent-uploads {
-        padding: 15px;
     }
 }
 
 @media (max-width: 480px) {
-    .album-grid {
+    .albums-page .album-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-
-    #news-updates, #recent-uploads {
-        padding: 10px;
     }
 }
