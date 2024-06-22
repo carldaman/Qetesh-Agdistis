@@ -6,7 +6,32 @@
     <title>Realise Swimsuit (Sleeved) Albums</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Paste your additional CSS here if needed */
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .album {
+            text-align: center;
+        }
+
+        .album img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .album img:hover {
+            transform: scale(1.05);
+        }
+
+        .album h3 {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body class="albums-page">
@@ -94,3 +119,4 @@
     <script src="scripts.js"></script>
 </body>
 </html>
+
