@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add the following styles */
+        #images-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .image-item {
+            border: 2px solid #000;
+            padding: 10px;
+            margin: 10px;
+            box-sizing: border-box;
+            width: 300px;
+            text-align: center;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -52,12 +74,12 @@
             <h2>Recently Uploaded Images</h2>
             <div id="images-container">
                 <div class="image-item">
-                    <img src="https://i.ibb.co/cyr3g7b/Long-Sleeve-Realise-Swimsuit-S7-10.jpg" alt="Image 1" style="width: 300px; height: auto; display: block; margin: 0 auto;">
+                    <img src="https://i.ibb.co/cyr3g7b/Long-Sleeve-Realise-Swimsuit-S7-10.jpg" alt="Image 1">
                     <p>Wearing a blue Realise sleeved swimsuit.</p>
                 </div>
 
                 <div class="image-item">
-                    <img src="https://i.ibb.co/k3D8JjH/Long-Sleeve-Realise-Swimsuit-S6-36.jpg" alt="Image 2" style="width: 300px; height: auto; display: block; margin: 0 auto;">
+                    <img src="https://i.ibb.co/k3D8JjH/Long-Sleeve-Realise-Swimsuit-S6-36.jpg" alt="Image 2">
                     <p>Getting wet in a blue Realise sleeved swimsuit.</p>
                 </div>
             </div>
