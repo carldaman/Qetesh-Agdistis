@@ -6,6 +6,29 @@
     <title>My Photo Gallery - Albums</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            margin: 0;
+        }
+
+        .header-content, .donate-button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f4f4f4;
+        }
+
+        .header-content nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-content nav ul li {
+            margin: 0 10px;
+        }
+
         .album-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -31,6 +54,23 @@
         .album h3 {
             margin-top: 10px;
             font-size: 1.2em;
+        }
+
+        .centered-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .centered-content h2 {
+            margin: 0;
+        }
+
+        main {
+            margin-top: -100vh; /* Adjust if needed to position the main content correctly */
         }
     </style>
 </head>
@@ -58,7 +98,7 @@
     <main>
         <section class="albums">
             <div class="centered-content">
-            <h2>The main categories of images, click to see the complete sets </h2>
+                <h2>The main categories of images, click to see the complete sets</h2>
             </div>
             <div class="album-grid">
                 <!-- Realise Swimsuit Sleeved Subfolder -->
@@ -79,4 +119,3 @@
     <script src="scripts.js"></script>
 </body>
 </html>
-
