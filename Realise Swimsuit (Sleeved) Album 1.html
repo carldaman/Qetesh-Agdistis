@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
+            font-family: Arial, sans-serif;
+        }
 
         main {
             padding: 20px;
@@ -22,6 +24,30 @@
             margin: 5px;
             width: calc(20% - 10px); /* Adjust as necessary */
             cursor: pointer;
+        }
+
+        .photo-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .like-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .like-count {
+            position: absolute;
+            bottom: 10px;
+            left: 60px;
+            color: #fff;
+            background-color: #000;
+            padding: 5px;
         }
 
         .lightbox {
@@ -98,7 +124,7 @@
             </nav>
             <div class="donate-button">
                 <a href="donate.html" class="button">Donate</a>
-        </div>
+            </div>
         </div>
     </header>
     <main>
@@ -199,9 +225,9 @@
             'https://i.ibb.co/d4KPK1v/Realise-Swimsuit-Sleeveless-S1-68.jpg'
         ];
 
-
         let currentPage = 1;
         const photosPerPage = 5;
+        const likes = Array(photos.length).fill(0);
 
         function displayPhotos() {
             const albumPhotos = document.getElementById('album-photos');
@@ -210,13 +236,34 @@
             const end = start + photosPerPage;
             const currentPhotos = photos.slice(start, end);
 
-            currentPhotos.forEach(photo => {
+            currentPhotos.forEach((photo, index) => {
+                const photoContainer = document.createElement('div');
+                photoContainer.classList.add('photo-container');
+
                 const img = document.createElement('img');
                 img.src = photo;
                 img.alt = 'Photo';
                 img.classList.add('album-photo');
                 img.onclick = () => openLightbox(photos.indexOf(photo));
-                albumPhotos.appendChild(img);
+                photoContainer.appendChild(img);
+
+                const likeButton = document.createElement('button');
+                likeButton.innerText = 'Like';
+                likeButton.classList.add('like-button');
+                likeButton.onclick = (e) => {
+                    e.stopPropagation();
+                    const photoIndex = photos.indexOf(photo);
+                    likes[photoIndex]++;
+                    likeCount.innerText = `Likes: ${likes[photoIndex]}`;
+                };
+                photoContainer.appendChild(likeButton);
+
+                const likeCount = document.createElement('span');
+                likeCount.classList.add('like-count');
+                likeCount.innerText = `Likes: ${likes[photos.indexOf(photo)]}`;
+                photoContainer.appendChild(likeCount);
+
+                albumPhotos.appendChild(photoContainer);
             });
         }
 
