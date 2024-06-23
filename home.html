@@ -105,6 +105,25 @@
             // Add more images as needed
         ];
 
+        // Load likes from localStorage
+        function loadLikes() {
+            const storedLikes = JSON.parse(localStorage.getItem('imageLikes')) || {};
+            images.forEach(image => {
+                if (storedLikes[image.src] !== undefined) {
+                    image.likes = storedLikes[image.src];
+                }
+            });
+        }
+
+        // Save likes to localStorage
+        function saveLikes() {
+            const likesToStore = {};
+            images.forEach(image => {
+                likesToStore[image.src] = image.likes;
+            });
+            localStorage.setItem('imageLikes', JSON.stringify(likesToStore));
+        }
+
         // Function to render images in a given container
         function renderImages(containerId, images) {
             const container = document.getElementById(containerId);
@@ -127,6 +146,7 @@
             const image = images.find(img => img.src === src);
             if (image) {
                 image.likes += 1;
+                saveLikes();
                 updateMostLikedImages();
                 renderImages("images-container", images); // Re-render the recent uploads
             }
@@ -139,6 +159,7 @@
         }
 
         // Initial rendering
+        loadLikes();
         renderImages("images-container", images);
         updateMostLikedImages();
     </script>
