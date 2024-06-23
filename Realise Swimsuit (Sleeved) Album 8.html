@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 8</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>   
+        body {
+            
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px);
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home.html"><img src="123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="albums.html">Albums</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="donate.html" class="button">Donate</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Realise Swimsuit (Sleeved) Album 8</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/qsXDcmr/Long-Sleeve-Realise-Swimsuit-S8-1.jpg',
+            'https://i.ibb.co/V9tZ1Xv/Long-Sleeve-Realise-Swimsuit-S8-2.jpg',
+            'https://i.ibb.co/jRR904Q/Long-Sleeve-Realise-Swimsuit-S8-3.jpg',
+            'https://i.ibb.co/mS0DrqC/Long-Sleeve-Realise-Swimsuit-S8-4.jpg',
+            'https://i.ibb.co/82Hr2rH/Long-Sleeve-Realise-Swimsuit-S8-5.jpg',
+            'https://i.ibb.co/1dtGb0s/Long-Sleeve-Realise-Swimsuit-S8-6.jpg',
+            'https://i.ibb.co/VwHBF7B/Long-Sleeve-Realise-Swimsuit-S8-7.jpg',
+            'https://i.ibb.co/1nV0Wqs/Long-Sleeve-Realise-Swimsuit-S8-8.jpg',
+            'https://i.ibb.co/6tgTrY8/Long-Sleeve-Realise-Swimsuit-S8-9.jpg',
+            'https://i.ibb.co/64ttkLf/Long-Sleeve-Realise-Swimsuit-S8-10.jpg',
+            'https://i.ibb.co/zVJmNtf/Long-Sleeve-Realise-Swimsuit-S8-11.jpg',
+            'https://i.ibb.co/KDVYQK1/Long-Sleeve-Realise-Swimsuit-S8-12.jpg',
+            'https://i.ibb.co/ncQRr0V/Long-Sleeve-Realise-Swimsuit-S8-13.jpg',
+            'https://i.ibb.co/80fzC4c/Long-Sleeve-Realise-Swimsuit-S8-14.jpg',
+            'https://i.ibb.co/Nn63g2s/Long-Sleeve-Realise-Swimsuit-S8-15.jpg',
+            'https://i.ibb.co/y5JQNbM/Long-Sleeve-Realise-Swimsuit-S8-16.jpg',
+            'https://i.ibb.co/0JW4yZ8/Long-Sleeve-Realise-Swimsuit-S8-17.jpg',
+            'https://i.ibb.co/8Mcj63f/Long-Sleeve-Realise-Swimsuit-S8-18.jpg',
+            'https://i.ibb.co/9wLkb3j/Long-Sleeve-Realise-Swimsuit-S8-19.jpg',
+            'https://i.ibb.co/mGH0mcf/Long-Sleeve-Realise-Swimsuit-S8-20.jpg',
+            'https://i.ibb.co/RNS78xJ/Long-Sleeve-Realise-Swimsuit-S8-21.jpg',
+            'https://i.ibb.co/CbXnpjx/Long-Sleeve-Realise-Swimsuit-S8-22.jpg',
+            'https://i.ibb.co/wcSR6CM/Long-Sleeve-Realise-Swimsuit-S8-23.jpg',
+            'https://i.ibb.co/8BmPMKQ/Long-Sleeve-Realise-Swimsuit-S8-24.jpg',
+            'https://i.ibb.co/N3QTzK4/Long-Sleeve-Realise-Swimsuit-S8-25.jpg',
+            'https://i.ibb.co/rtPrpTn/Long-Sleeve-Realise-Swimsuit-S8-26.jpg',
+            'https://i.ibb.co/pyRfZKn/Long-Sleeve-Realise-Swimsuit-S8-27.jpg',
+            'https://i.ibb.co/P4kQFhN/Long-Sleeve-Realise-Swimsuit-S8-28.jpg',
+            'https://i.ibb.co/nL9QRS9/Long-Sleeve-Realise-Swimsuit-S8-29.jpg',
+            'https://i.ibb.co/BNRytLL/Long-Sleeve-Realise-Swimsuit-S8-30.jpg',
+            'https://i.ibb.co/NxZprQm/Long-Sleeve-Realise-Swimsuit-S8-31.jpg',
+            'https://i.ibb.co/WgqFwk8/Long-Sleeve-Realise-Swimsuit-S8-32.jpg',
+            'https://i.ibb.co/sVyBH2f/Long-Sleeve-Realise-Swimsuit-S8-33.jpg',
+            'https://i.ibb.co/kxXcJnB/Long-Sleeve-Realise-Swimsuit-S8-34.jpg',
+            'https://i.ibb.co/vBbG70z/Long-Sleeve-Realise-Swimsuit-S8-35.jpg',
+            'https://i.ibb.co/jwZbYgw/Long-Sleeve-Realise-Swimsuit-S8-36.jpg',
+            'https://i.ibb.co/N1MT5wj/Long-Sleeve-Realise-Swimsuit-S8-37.jpg',
+            'https://i.ibb.co/Q9rk8L2/Long-Sleeve-Realise-Swimsuit-S8-38.jpg',
+            'https://i.ibb.co/jgng7S5/Long-Sleeve-Realise-Swimsuit-S8-39.jpg',
+            'https://i.ibb.co/CmPz6fB/Long-Sleeve-Realise-Swimsuit-S8-40.jpg',
+            'https://i.ibb.co/0VdzCgP/Long-Sleeve-Realise-Swimsuit-S8-41.jpg',
+            'https://i.ibb.co/9VH3JFm/Long-Sleeve-Realise-Swimsuit-S8-42.jpg',
+            'https://i.ibb.co/K72pHMC/Long-Sleeve-Realise-Swimsuit-S8-43.jpg',
+            'https://i.ibb.co/wMgTDYG/Long-Sleeve-Realise-Swimsuit-S8-44.jpg',
+            'https://i.ibb.co/3htvFFw/Long-Sleeve-Realise-Swimsuit-S8-45.jpg',
+            'https://i.ibb.co/svQnD9j/Long-Sleeve-Realise-Swimsuit-S8-46.jpg',
+            'https://i.ibb.co/Jr6z5Cv/Long-Sleeve-Realise-Swimsuit-S8-47.jpg',
+            'https://i.ibb.co/b2pSZrk/Long-Sleeve-Realise-Swimsuit-S8-48.jpg',
+            'https://i.ibb.co/jvBxhCc/Long-Sleeve-Realise-Swimsuit-S8-49.jpg',
+            'https://i.ibb.co/wBd07Jm/Long-Sleeve-Realise-Swimsuit-S8-50.jpg',
+            'https://i.ibb.co/2cbzGDk/Long-Sleeve-Realise-Swimsuit-S8-51.jpg',
+            'https://i.ibb.co/nDXSFX7/Long-Sleeve-Realise-Swimsuit-S8-52.jpg',
+            'https://i.ibb.co/Bs6QQxP/Long-Sleeve-Realise-Swimsuit-S8-53.jpg',
+            'https://i.ibb.co/RHSMXsZ/Long-Sleeve-Realise-Swimsuit-S8-54.jpg',
+            'https://i.ibb.co/7NWbX4V/Long-Sleeve-Realise-Swimsuit-S8-55.jpg',
+            'https://i.ibb.co/Btx5hQ9/Long-Sleeve-Realise-Swimsuit-S8-56.jpg',
+            'https://i.ibb.co/QXt3bH4/Long-Sleeve-Realise-Swimsuit-S8-57.jpg',
+            'https://i.ibb.co/QDtXNCN/Long-Sleeve-Realise-Swimsuit-S8-58.jpg',
+            'https://i.ibb.co/G9hLc0k/Long-Sleeve-Realise-Swimsuit-S8-59.jpg',
+            'https://i.ibb.co/dWwpSJ1/Long-Sleeve-Realise-Swimsuit-S8-60.jpg',
+            'https://i.ibb.co/wpPMkzB/Long-Sleeve-Realise-Swimsuit-S8-61.jpg',
+            'https://i.ibb.co/54gdsXR/Long-Sleeve-Realise-Swimsuit-S8-62.jpg',
+            'https://i.ibb.co/F62Vhjp/Long-Sleeve-Realise-Swimsuit-S8-63.jpg',
+            'https://i.ibb.co/gFPMtqT/Long-Sleeve-Realise-Swimsuit-S8-64.jpg',
+            'https://i.ibb.co/x1j30qf/Long-Sleeve-Realise-Swimsuit-S8-65.jpg',
+            'https://i.ibb.co/Nn8vGSF/Long-Sleeve-Realise-Swimsuit-S8-66.jpg',
+            'https://i.ibb.co/jWQPmWs/Long-Sleeve-Realise-Swimsuit-S8-67.jpg',
+            'https://i.ibb.co/HdV80gb/Long-Sleeve-Realise-Swimsuit-S8-68.jpg',
+            'https://i.ibb.co/C9SBhdG/Long-Sleeve-Realise-Swimsuit-S8-69.jpg',
+            'https://i.ibb.co/F8tyJV1/Long-Sleeve-Realise-Swimsuit-S8-70.jpg'
+
+        ];
+
+        let currentPhotoIndex = 0;
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
