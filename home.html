@@ -4,46 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Reset default margin and padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-
-        /* Basic styles for header and main content */
-        header {
-            background-color: #f0f0f0;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .main-content {
-            padding: 20px;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* Styles for image container */
+        /* Add the following styles */
         #images-container {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            margin-bottom: 20px; /* Add margin between images and footer */
         }
 
         .image-item {
@@ -52,13 +19,12 @@
             margin: 10px;
             box-sizing: border-box;
             text-align: center;
-            width: 200px; /* Set a fixed width for consistent spacing */
         }
 
         .image-item img {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
+            width: 100%;  /* Adjust the width percentage as needed */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 200px; /* Maximum width */
         }
     </style>
 </head>
@@ -67,9 +33,11 @@
         <div class="logo">
             <a href="home.html"><img src="123.png" alt="Logo"></a>
         </div>
+    <center>
         <h1>Welcome to Qetesh Agdistis</h1>
         <h4>Discover the elegance and allure of swimsuits, leotards, latex, lingerie, and stockings with Qetesh Agdistis</h4>
         <h4>Where fashion meets fantasy</h4>
+     </center>
         <nav>
             <ul>
                 <li><a href="home.html">Home</a></li>
@@ -119,9 +87,9 @@
     </main>
 
     <footer>
-        <div style="text-align: center;">
+        <div style="text-align: center; padding: 10px;">
             <p>&copy; 2024 Qetesh-Agdistis. All images and content are the property of qetesh-agdistis.com. Unauthorized use prohibited.</p>
-            <p>Contact: <a href="contact.html" style="color: green;">Contact Page</a></p>
+           <p>Contact: <a href="contact.html" style="color: green;">Contact Page</a></p>
         </div>
     </footer>
 
