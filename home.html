@@ -6,8 +6,7 @@
     <title>Homepage</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Add the following styles */
-        #images-container {
+        #images-container, #recent-uploads-photos {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -22,9 +21,9 @@
         }
 
         .image-item img {
-            width: 100%;  /* Adjust the width percentage as needed */
-            height: auto; /* Maintain aspect ratio */
-            max-width: 200px; /* Maximum width */
+            width: 100%;
+            height: auto;
+            max-width: 200px;
         }
     </style>
 </head>
@@ -33,11 +32,11 @@
         <div class="logo">
             <a href="home.html"><img src="123.png" alt="Logo"></a>
         </div>
-    <center>
-        <h1>Welcome to Qetesh Agdistis</h1>
-        <h4>Discover the elegance and allure of swimsuits, leotards, latex, lingerie, and stockings with Qetesh Agdistis</h4>
-        <h4>Where fashion meets fantasy</h4>
-     </center>
+        <center>
+            <h1>Welcome to Qetesh Agdistis</h1>
+            <h4>Discover the elegance and allure of swimsuits, leotards, latex, lingerie, and stockings with Qetesh Agdistis</h4>
+            <h4>Where fashion meets fantasy</h4>
+        </center>
         <nav>
             <ul>
                 <li><a href="home.html">Home</a></li>
@@ -83,6 +82,10 @@
                     <p>Getting wet in a blue Realise sleeved swimsuit.</p>
                 </div>
             </div>
+            <h2><u>Most Liked Photos</u></h2>
+            <div id="recent-uploads-photos">
+                <!-- Most liked photos will be loaded here by JavaScript -->
+            </div>
         </section>
     </main>
 
@@ -93,7 +96,51 @@
         </div>
     </footer>
 
-    <!-- Optional: JavaScript file if you have additional scripts -->
-    <!-- <script src="script.js"></script> -->
+    <!-- JavaScript to handle image likes and display most liked images -->
+    <script>
+        // Sample data structure to store image likes
+        let images = [
+            { src: "https://i.ibb.co/cyr3g7b/Long-Sleeve-Realise-Swimsuit-S7-10.jpg", description: "Wearing a blue Realise sleeved swimsuit.", likes: 10 },
+            { src: "https://i.ibb.co/k3D8JjH/Long-Sleeve-Realise-Swimsuit-S6-36.jpg", description: "Getting wet in a blue Realise sleeved swimsuit.", likes: 5 },
+            // Add more images as needed
+        ];
+
+        // Function to render images in a given container
+        function renderImages(containerId, images) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            images.forEach(image => {
+                const imageItem = document.createElement("div");
+                imageItem.className = "image-item";
+                imageItem.innerHTML = `
+                    <img src="${image.src}" alt="Image">
+                    <p>${image.description}</p>
+                    <button onclick="likeImage('${image.src}')">Like</button>
+                    <span>Likes: ${image.likes}</span>
+                `;
+                container.appendChild(imageItem);
+            });
+        }
+
+        // Function to handle liking an image
+        function likeImage(src) {
+            const image = images.find(img => img.src === src);
+            if (image) {
+                image.likes += 1;
+                updateMostLikedImages();
+                renderImages("images-container", images); // Re-render the recent uploads
+            }
+        }
+
+        // Function to update the most liked images
+        function updateMostLikedImages() {
+            const mostLikedImages = [...images].sort((a, b) => b.likes - a.likes).slice(0, 5);
+            renderImages("recent-uploads-photos", mostLikedImages);
+        }
+
+        // Initial rendering
+        renderImages("images-container", images);
+        updateMostLikedImages();
+    </script>
 </body>
 </html>
