@@ -6,17 +6,7 @@
     <title>My Photo Gallery - Albums</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-5FTEC93L1H');
-    </script>
-
+        /* CSS styles for albums */
         .album-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -39,11 +29,22 @@
             transform: scale(1.05);
         }
 
-        .album h3 {
+        .album h5 {
             margin-top: 10px;
             font-size: 1.2em;
         }
     </style>
+
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 <body class="albums-page">
     <header>
