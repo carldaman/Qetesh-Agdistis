@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 3</title>
+    <link rel="stylesheet" href="styles.css">
 
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home.html"><img src="123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="albums.html">Albums</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="donate.html" class="button">Donate</a>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Realise Swimsuit (Sleeveless) Album 3</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/2YqszSF/Realise-Swimsuit-S2-1.jpg',
+            'https://i.ibb.co/Jzy5dqK/Realise-Swimsuit-S2-2.jpg',
+            'https://i.ibb.co/n8FnWF7/Realise-Swimsuit-S2-3.jpg',
+            'https://i.ibb.co/3WzjGdK/Realise-Swimsuit-S2-4.jpg',
+            'https://i.ibb.co/ZGkjbV2/Realise-Swimsuit-S2-5.jpg',
+            'https://i.ibb.co/Jxd4xZ2/Realise-Swimsuit-S2-6.jpg',
+            'https://i.ibb.co/Ry11BmL/Realise-Swimsuit-S2-7.jpg',
+            'https://i.ibb.co/dgPCJs1/Realise-Swimsuit-S2-8.jpg',
+            'https://i.ibb.co/GkQn4tq/Realise-Swimsuit-S2-9.jpg',
+            'https://i.ibb.co/bj0BrKh/Realise-Swimsuit-S2-10.jpg',
+            'https://i.ibb.co/Gvb25gD/Realise-Swimsuit-S2-11.jpg',
+            'https://i.ibb.co/KVbJYvg/Realise-Swimsuit-S2-12.jpg',
+            'https://i.ibb.co/ccNZF2d/Realise-Swimsuit-S2-13.jpg',
+            'https://i.ibb.co/sJ4Z0qC/Realise-Swimsuit-S2-14.jpg',
+            'https://i.ibb.co/syJwQNT/Realise-Swimsuit-S2-15.jpg',
+            'https://i.ibb.co/3d8Rfsv/Realise-Swimsuit-S2-16.jpg',
+            'https://i.ibb.co/XzF1fQL/Realise-Swimsuit-S2-17.jpg',
+            'https://i.ibb.co/fNXMydX/Realise-Swimsuit-S2-18.jpg',
+            'https://i.ibb.co/XYqjx7M/Realise-Swimsuit-S2-19.jpg',
+            'https://i.ibb.co/tcvHmmd/Realise-Swimsuit-S2-20.jpg',
+            'https://i.ibb.co/k1JrYv8/Realise-Swimsuit-S2-21.jpg',
+            'https://i.ibb.co/jL371Mw/Realise-Swimsuit-S2-22.jpg',
+            'https://i.ibb.co/q17dBTf/Realise-Swimsuit-S2-23.jpg',
+            'https://i.ibb.co/yBd7QY8/Realise-Swimsuit-S2-24.jpg',
+            'https://i.ibb.co/hyFDq8F/Realise-Swimsuit-S2-25.jpg',
+            'https://i.ibb.co/JdsGWxB/Realise-Swimsuit-S2-26.jpg',
+            'https://i.ibb.co/K2b7NmH/Realise-Swimsuit-S2-27.jpg',
+            'https://i.ibb.co/Dk4t329/Realise-Swimsuit-S2-28.jpg',
+            'https://i.ibb.co/CpLndZf/Realise-Swimsuit-S2-29.jpg',
+            'https://i.ibb.co/Gc2r4Fq/Realise-Swimsuit-S2-30.jpg',
+            'https://i.ibb.co/LQCHJhJ/Realise-Swimsuit-S2-31.jpg',
+            'https://i.ibb.co/W6c5zQK/Realise-Swimsuit-S2-32.jpg',
+            'https://i.ibb.co/NCg22t7/Realise-Swimsuit-S2-33.jpg',
+            'https://i.ibb.co/qmHL6Y4/Realise-Swimsuit-S2-34.jpg',
+            'https://i.ibb.co/Hpty9bB/Realise-Swimsuit-S2-35.jpg',
+            'https://i.ibb.co/z43VPwb/Realise-Swimsuit-S2-36.jpg',
+            'https://i.ibb.co/YZbpCP0/Realise-Swimsuit-S2-37.jpg',
+            'https://i.ibb.co/3S5rjkr/Realise-Swimsuit-S2-38.jpg',
+            'https://i.ibb.co/Yk3sCxK/Realise-Swimsuit-S2-39.jpg',
+            'https://i.ibb.co/NyQLqqP/Realise-Swimsuit-S2-40.jpg',
+            'https://i.ibb.co/y6K65rK/Realise-Swimsuit-S2-41.jpg',
+            'https://i.ibb.co/TRd1s3B/Realise-Swimsuit-S2-42.jpg',
+            'https://i.ibb.co/txZZrzq/Realise-Swimsuit-S2-43.jpg',
+            'https://i.ibb.co/ydvFgcb/Realise-Swimsuit-S2-44.jpg',
+            'https://i.ibb.co/Tct2GBW/Realise-Swimsuit-S2-45.jpg',
+            'https://i.ibb.co/ZWg8QNW/Realise-Swimsuit-S2-46.jpg',
+            'https://i.ibb.co/vzdk15S/Realise-Swimsuit-S2-47.jpg',
+            'https://i.ibb.co/BPJNDTp/Realise-Swimsuit-S2-48.jpg',
+            'https://i.ibb.co/bWBygGb/Realise-Swimsuit-S2-49.jpg',
+            'https://i.ibb.co/v1Rgt21/Realise-Swimsuit-S2-50.jpg',
+            'https://i.ibb.co/MR6z7b8/Realise-Swimsuit-S2-51.jpg',
+            'https://i.ibb.co/0qYp9yy/Realise-Swimsuit-S2-52.jpg',
+            'https://i.ibb.co/9ZkRMns/Realise-Swimsuit-S2-53.jpg'
+        ];
+
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
