@@ -1,1 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 13</title>
+    <link rel="stylesheet" href="styles.css">
 
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home.html"><img src="123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="albums.html">Albums</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="donate.html" class="button">Donate</a>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Realise Swimsuit (Sleeveless) Album 13</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/55B2tjw/Realise-Swimsuit-S13-1.jpg',
+            'https://i.ibb.co/Bn6f3YB/Realise-Swimsuit-S13-2.jpg',
+            'https://i.ibb.co/pdDx99L/Realise-Swimsuit-S13-3.jpg',
+            'https://i.ibb.co/6H75Tbk/Realise-Swimsuit-S13-4.jpg',
+            'https://i.ibb.co/pRjmR1L/Realise-Swimsuit-S13-5.jpg',
+            'https://i.ibb.co/gPPMH5M/Realise-Swimsuit-S13-6.jpg',
+            'https://i.ibb.co/68QqCRw/Realise-Swimsuit-S13-7.jpg',
+            'https://i.ibb.co/92sf9Bp/Realise-Swimsuit-S13-8.jpg',
+            'https://i.ibb.co/s2RxjJ6/Realise-Swimsuit-S13-9.jpg',
+            'https://i.ibb.co/QPhpbRF/Realise-Swimsuit-S13-10.jpg',
+            'https://i.ibb.co/S5ZPSGx/Realise-Swimsuit-S13-11.jpg',
+            'https://i.ibb.co/4ZCLCBJ/Realise-Swimsuit-S13-12.jpg',
+            'https://i.ibb.co/ysx8XkL/Realise-Swimsuit-S13-13.jpg',
+            'https://i.ibb.co/TrG6C6x/Realise-Swimsuit-S13-14.jpg',
+            'https://i.ibb.co/VwR9Jch/Realise-Swimsuit-S13-15.jpg',
+            'https://i.ibb.co/2gDPLsQ/Realise-Swimsuit-S13-16.jpg',
+            'https://i.ibb.co/2PSS0kr/Realise-Swimsuit-S13-17.jpg',
+            'https://i.ibb.co/gFHVQ4m/Realise-Swimsuit-S13-18.jpg',
+            'https://i.ibb.co/CHdCTsS/Realise-Swimsuit-S13-19.jpg',
+            'https://i.ibb.co/xGNMJgK/Realise-Swimsuit-S13-20.jpg',
+            'https://i.ibb.co/C8vc8w8/Realise-Swimsuit-S13-21.jpg',
+            'https://i.ibb.co/jrsZC74/Realise-Swimsuit-S13-22.jpg',
+            'https://i.ibb.co/xFP06S1/Realise-Swimsuit-S13-23.jpg',
+            'https://i.ibb.co/x33bHbQ/Realise-Swimsuit-S13-24.jpg',
+            'https://i.ibb.co/cyy4CBt/Realise-Swimsuit-S13-25.jpg',
+            'https://i.ibb.co/P9pzmw5/Realise-Swimsuit-S13-26.jpg',
+            'https://i.ibb.co/RvQfD49/Realise-Swimsuit-S13-27.jpg',
+            'https://i.ibb.co/ct8nwTG/Realise-Swimsuit-S13-28.jpg',
+            'https://i.ibb.co/k50KgC1/Realise-Swimsuit-S13-29.jpg',
+            'https://i.ibb.co/8NHBJvd/Realise-Swimsuit-S13-30.jpg',
+            'https://i.ibb.co/5vZXHj4/Realise-Swimsuit-S13-31.jpg',
+            'https://i.ibb.co/FHxfmdW/Realise-Swimsuit-S13-32.jpg',
+            'https://i.ibb.co/zfMQLSx/Realise-Swimsuit-S13-33.jpg',
+            'https://i.ibb.co/2S9ZyMY/Realise-Swimsuit-S13-34.jpg',
+            'https://i.ibb.co/bmgB8xC/Realise-Swimsuit-S13-35.jpg',
+            'https://i.ibb.co/cTLdqyQ/Realise-Swimsuit-S13-36.jpg',
+            'https://i.ibb.co/ZN48gVL/Realise-Swimsuit-S13-37.jpg',
+            'https://i.ibb.co/YZ4TXHJ/Realise-Swimsuit-S13-38.jpg',
+            'https://i.ibb.co/NW7JSx7/Realise-Swimsuit-S13-39.jpg',
+            'https://i.ibb.co/m8y1MNF/Realise-Swimsuit-S13-40.jpg',
+            'https://i.ibb.co/dbxT9TF/Realise-Swimsuit-S13-41.jpg',
+            'https://i.ibb.co/M2JgyZq/Realise-Swimsuit-S13-42.jpg',
+            'https://i.ibb.co/X3vf2PS/Realise-Swimsuit-S13-43.jpg',
+            'https://i.ibb.co/BjjKvCq/Realise-Swimsuit-S13-44.jpg',
+            'https://i.ibb.co/tMkhQhW/Realise-Swimsuit-S13-45.jpg',
+            'https://i.ibb.co/RpdvjYn/Realise-Swimsuit-S13-46.jpg',
+            'https://i.ibb.co/Fzsp3jS/Realise-Swimsuit-S13-47.jpg',
+            'https://i.ibb.co/xL40JFN/Realise-Swimsuit-S13-48.jpg',
+            'https://i.ibb.co/p2Kbg50/Realise-Swimsuit-S13-49.jpg',
+            'https://i.ibb.co/JqHZp8f/Realise-Swimsuit-S13-50.jpg',
+            'https://i.ibb.co/5jB2khj/Realise-Swimsuit-S13-51.jpg',
+            'https://i.ibb.co/smRwCd4/Realise-Swimsuit-S13-52.jpg',
+            'https://i.ibb.co/v1pWMLL/Realise-Swimsuit-S13-53.jpg',
+            'https://i.ibb.co/VV7W1Sp/Realise-Swimsuit-S13-54.jpg',
+            'https://i.ibb.co/jkvytFz/Realise-Swimsuit-S13-55.jpg',
+            'https://i.ibb.co/MPxKbHP/Realise-Swimsuit-S13-56.jpg',
+            'https://i.ibb.co/RN3QBPB/Realise-Swimsuit-S13-57.jpg',
+            'https://i.ibb.co/Y8gXZK3/Realise-Swimsuit-S13-58.jpg',
+            'https://i.ibb.co/CWzdhyS/Realise-Swimsuit-S13-59.jpg',
+            'https://i.ibb.co/GtpmTw8/Realise-Swimsuit-S13-60.jpg',
+            'https://i.ibb.co/sVbnxnD/Realise-Swimsuit-S13-61.jpg',
+            'https://i.ibb.co/sWpfzL0/Realise-Swimsuit-S13-62.jpg',
+            'https://i.ibb.co/C2vW7wz/Realise-Swimsuit-S13-63.jpg',
+            'https://i.ibb.co/V3YX6T1/Realise-Swimsuit-S13-64.jpg',
+            'https://i.ibb.co/QQd04jQ/Realise-Swimsuit-S13-65.jpg',
+            'https://i.ibb.co/YbdGqND/Realise-Swimsuit-S13-66.jpg',
+            'https://i.ibb.co/KKT49Qy/Realise-Swimsuit-S13-67.jpg',
+            'https://i.ibb.co/47Dz7BJ/Realise-Swimsuit-S13-68.jpg',
+            'https://i.ibb.co/V9kPBFp/Realise-Swimsuit-S13-69.jpg',
+            'https://i.ibb.co/L50vfqd/Realise-Swimsuit-S13-70.jpg',
+            'https://i.ibb.co/K7vfqJ4/Realise-Swimsuit-S13-71.jpg',
+            'https://i.ibb.co/rFFwKZ9/Realise-Swimsuit-S13-72.jpg',
+            'https://i.ibb.co/6H6Bz91/Realise-Swimsuit-S13-73.jpg',
+            'https://i.ibb.co/WGfwbn9/Realise-Swimsuit-S13-74.jpg'
+
+        ];
+
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
