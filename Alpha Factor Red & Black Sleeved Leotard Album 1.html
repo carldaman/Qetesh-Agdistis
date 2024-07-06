@@ -1,1 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 1</title>
+    <link rel="stylesheet" href="styles.css">
 
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home.html"><img src="123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="albums.html">Albums</a></li>
+                    <li><a href="videos.html">Videos</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="donate.html" class="button">Donate</a>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Alpha Factor Red & Black Sleeved Leotard Album 1</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/TL4bYY6/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-1.jpg',
+            'https://i.ibb.co/0GJ485Q/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-2.jpg',
+            'https://i.ibb.co/VLZXqGY/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-3.jpg',
+            'https://i.ibb.co/CtL6kKy/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-4.jpg',
+            'https://i.ibb.co/7zR0Hvd/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-5.jpg',
+            'https://i.ibb.co/xSMtPPD/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-6.jpg',
+            'https://i.ibb.co/WkZY8Mn/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-7.jpg',
+            'https://i.ibb.co/tZjBn7G/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-8.jpg',
+            'https://i.ibb.co/Vv4RsMy/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-9.jpg',
+            'https://i.ibb.co/ky5bhQ8/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-10.jpg',
+            'https://i.ibb.co/bmrWv6N/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-11.jpg',
+            'https://i.ibb.co/84qLGBj/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-12.jpg',
+            'https://i.ibb.co/Mkm8wjd/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-13.jpg',
+            'https://i.ibb.co/pK0dgmm/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-14.jpg',
+            'https://i.ibb.co/LhHVGQV/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-15.jpg',
+            'https://i.ibb.co/JxkCHYx/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-16.jpg',
+            'https://i.ibb.co/DfRVK4D/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-17.jpg',
+            'https://i.ibb.co/SPwDmgK/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-18.jpg',
+            'https://i.ibb.co/S388h3t/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-19.jpg',
+            'https://i.ibb.co/JKFZpLy/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-20.jpg',
+            'https://i.ibb.co/j8rDtSx/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-21.jpg',
+            'https://i.ibb.co/SKh6jyn/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-22.jpg',
+            'https://i.ibb.co/6w1MF2t/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-23.jpg',
+            'https://i.ibb.co/5K4N94S/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-24.jpg',
+            'https://i.ibb.co/z6kk46B/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-25.jpg',
+            'https://i.ibb.co/BZXT9jP/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-26.jpg',
+            'https://i.ibb.co/KDSGXJT/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-27.jpg',
+            'https://i.ibb.co/w7j6Z78/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-28.jpg',
+            'https://i.ibb.co/f2ZYC9p/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-29.jpg',
+            'https://i.ibb.co/qs6wdgg/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-30.jpg',
+            'https://i.ibb.co/2ybq0Mh/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-31.jpg',
+            'https://i.ibb.co/XWYTDF5/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-32.jpg',
+            'https://i.ibb.co/M7pJyJM/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-33.jpg',
+            'https://i.ibb.co/2Ww4FDM/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-34.jpg',
+            'https://i.ibb.co/rwZLqrt/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-35.jpg',
+            'https://i.ibb.co/ZVvZrR8/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-36.jpg',
+            'https://i.ibb.co/60057sx/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-37.jpg',
+            'https://i.ibb.co/q9f9fzq/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-38.jpg',
+            'https://i.ibb.co/0C50c8p/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-39.jpg',
+            'https://i.ibb.co/ThZh5Fm/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-40.jpg',
+            'https://i.ibb.co/NVQ2qG4/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-41.jpg',
+            'https://i.ibb.co/SK7bQmv/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-42.jpg',
+            'https://i.ibb.co/8gBk0vq/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-43.jpg',
+            'https://i.ibb.co/7JPh0bq/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-44.jpg',
+            'https://i.ibb.co/bP5mPbL/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-45.jpg',
+            'https://i.ibb.co/bRx5jGT/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-46.jpg',
+            'https://i.ibb.co/2vh4cxh/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-47.jpg',
+            'https://i.ibb.co/ryXr0Md/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-48.jpg',
+            'https://i.ibb.co/zx9F4yk/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-49.jpg',
+            'https://i.ibb.co/2j3Jy1k/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-50.jpg',
+            'https://i.ibb.co/ZdVWnz3/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-51.jpg',
+            'https://i.ibb.co/JrMLXWd/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-52.jpg',
+            'https://i.ibb.co/dDr9qJK/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-53.jpg',
+            'https://i.ibb.co/p3vH4hh/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-54.jpg',
+            'https://i.ibb.co/cTV8QPd/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-55.jpg',
+            'https://i.ibb.co/sws1184/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-56.jpg',
+            'https://i.ibb.co/9vWRRPD/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-57.jpg',
+            'https://i.ibb.co/z4X2yf8/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-58.jpg',
+            'https://i.ibb.co/JQc1mNb/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-59.jpg',
+            'https://i.ibb.co/CstR8L0/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-60.jpg',
+            'https://i.ibb.co/6NT7sqh/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-61.jpg',
+            'https://i.ibb.co/fx5TZQZ/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-62.jpg',
+            'https://i.ibb.co/6HJqBrG/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-63.jpg',
+            'https://i.ibb.co/8bBgDdX/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-64.jpg',
+            'https://i.ibb.co/3FWJGDp/Alpha-Factor-Red-Black-Sleeved-Leotard-S1-65.jpg'
+        ];
+
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
