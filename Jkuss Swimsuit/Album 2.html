@@ -1,1 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 1</title>
+    <link rel="stylesheet" href="../styles.css">
 
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Jkuss Swimsuit Album 2</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/QdSJT0g/JKuss-Swimsuit-S1-1.jpg',
+            'https://i.ibb.co/8gdN5z3/JKuss-Swimsuit-S2-1.jpg',
+            'https://i.ibb.co/Z8WrP0B/JKuss-Swimsuit-S2-2.jpg',
+            'https://i.ibb.co/8XJ6HC8/JKuss-Swimsuit-S2-3.jpg',
+            'https://i.ibb.co/m6ZHTng/JKuss-Swimsuit-S2-4.jpg',
+            'https://i.ibb.co/3FFQ9qk/JKuss-Swimsuit-S2-5.jpg',
+            'https://i.ibb.co/z6v6rCY/JKuss-Swimsuit-S2-6.jpg',
+            'https://i.ibb.co/rpQJVP4/JKuss-Swimsuit-S2-7.jpg',
+            'https://i.ibb.co/StrrmSg/JKuss-Swimsuit-S2-8.jpg',
+            'https://i.ibb.co/txznjHf/JKuss-Swimsuit-S2-9.jpg',
+            'https://i.ibb.co/YNdPj4H/JKuss-Swimsuit-S2-10.jpg',
+            'https://i.ibb.co/VNsPXxv/JKuss-Swimsuit-S2-11.jpg',
+            'https://i.ibb.co/P5jzrbW/JKuss-Swimsuit-S2-12.jpg',
+            'https://i.ibb.co/rw3MnD0/JKuss-Swimsuit-S2-13.jpg',
+            'https://i.ibb.co/ZY1YG7K/JKuss-Swimsuit-S2-14.jpg',
+            'https://i.ibb.co/2gQ0hhS/JKuss-Swimsuit-S2-15.jpg',
+            'https://i.ibb.co/gFCzWSG/JKuss-Swimsuit-S2-16.jpg',
+            'https://i.ibb.co/X8gh571/JKuss-Swimsuit-S2-17.jpg',
+            'https://i.ibb.co/f8QfnNF/JKuss-Swimsuit-S2-18.jpg',
+            'https://i.ibb.co/YR7Jjh3/JKuss-Swimsuit-S2-19.jpg',
+            'https://i.ibb.co/pjMpbG5/JKuss-Swimsuit-S2-20.jpg',
+            'https://i.ibb.co/xMpK3FQ/JKuss-Swimsuit-S2-21.jpg',
+            'https://i.ibb.co/8gnBkKQ/JKuss-Swimsuit-S2-22.jpg',
+            'https://i.ibb.co/cFXVZd3/JKuss-Swimsuit-S2-23.jpg',
+            'https://i.ibb.co/VwLFhDR/JKuss-Swimsuit-S2-24.jpg',
+            'https://i.ibb.co/Byd2J2Z/JKuss-Swimsuit-S2-25.jpg',
+            'https://i.ibb.co/ZMSGTxw/JKuss-Swimsuit-S2-26.jpg',
+            'https://i.ibb.co/SNSTMmC/JKuss-Swimsuit-S2-27.jpg',
+            'https://i.ibb.co/Vm20dvt/JKuss-Swimsuit-S2-28.jpg'
+        ];
+
+
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
