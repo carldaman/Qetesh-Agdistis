@@ -1,1 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 1</title>
+    <link rel="stylesheet" href="../styles.css">
 
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>BK's Purple Sleeveless Leotard Album 1</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/p0BmNFV/Bks-Purple-Sleeveless-Leotard-1.jpg',
+            'https://i.ibb.co/sg5f0sn/Bks-Purple-Sleeveless-Leotard-2.jpg',
+            'https://i.ibb.co/F3h5L39/Bks-Purple-Sleeveless-Leotard-3.jpg',
+            'https://i.ibb.co/17zcy9D/Bks-Purple-Sleeveless-Leotard-4.jpg',
+            'https://i.ibb.co/H7cFScn/Bks-Purple-Sleeveless-Leotard-5.jpg',
+            'https://i.ibb.co/hVvt3kx/Bks-Purple-Sleeveless-Leotard-6.jpg',
+            'https://i.ibb.co/NSnvkKq/Bks-Purple-Sleeveless-Leotard-7.jpg',
+            'https://i.ibb.co/pv5v0tN/Bks-Purple-Sleeveless-Leotard-8.jpg',
+            'https://i.ibb.co/N1m0rgs/Bks-Purple-Sleeveless-Leotard-9.jpg',
+            'https://i.ibb.co/7Y4BzQp/Bks-Purple-Sleeveless-Leotard-10.jpg',
+            'https://i.ibb.co/9c6hYRK/Bks-Purple-Sleeveless-Leotard-11.jpg',
+            'https://i.ibb.co/x2dQPdz/Bks-Purple-Sleeveless-Leotard-12.jpg',
+            'https://i.ibb.co/y6pGt8m/Bks-Purple-Sleeveless-Leotard-13.jpg',
+            'https://i.ibb.co/fNLCyFv/Bks-Purple-Sleeveless-Leotard-14.jpg',
+            'https://i.ibb.co/nfttcjJ/Bks-Purple-Sleeveless-Leotard-15.jpg',
+            'https://i.ibb.co/pQHzGdt/Bks-Purple-Sleeveless-Leotard-16.jpg',
+            'https://i.ibb.co/Pm1tjY0/Bks-Purple-Sleeveless-Leotard-17.jpg',
+            'https://i.ibb.co/128J1VH/Bks-Purple-Sleeveless-Leotard-18.jpg',
+            'https://i.ibb.co/jL1NJZv/Bks-Purple-Sleeveless-Leotard-19.jpg',
+            'https://i.ibb.co/B3VrgQM/Bks-Purple-Sleeveless-Leotard-20.jpg',
+            'https://i.ibb.co/wKj6w4F/Bks-Purple-Sleeveless-Leotard-21.jpg',
+            'https://i.ibb.co/JH76Bk5/Bks-Purple-Sleeveless-Leotard-22.jpg',
+            'https://i.ibb.co/9cLVBqd/Bks-Purple-Sleeveless-Leotard-23.jpg',
+            'https://i.ibb.co/L5zc17q/Bks-Purple-Sleeveless-Leotard-24.jpg',
+            'https://i.ibb.co/kXqTwrn/Bks-Purple-Sleeveless-Leotard-25.jpg',
+            'https://i.ibb.co/2NNm27B/Bks-Purple-Sleeveless-Leotard-26.jpg',
+            'https://i.ibb.co/zJ2kdgq/Bks-Purple-Sleeveless-Leotard-27.jpg',
+            'https://i.ibb.co/vkYB2fg/Bks-Purple-Sleeveless-Leotard-28.jpg',
+            'https://i.ibb.co/CsFdn0z/Bks-Purple-Sleeveless-Leotard-29.jpg',
+            'https://i.ibb.co/09pSvKD/Bks-Purple-Sleeveless-Leotard-30.jpg',
+            'https://i.ibb.co/Z8Whb3j/Bks-Purple-Sleeveless-Leotard-31.jpg',
+            'https://i.ibb.co/ZSTmvy7/Bks-Purple-Sleeveless-Leotard-32.jpg',
+            'https://i.ibb.co/Fgv45dm/Bks-Purple-Sleeveless-Leotard-33.jpg',
+            'https://i.ibb.co/3hZqcsC/Bks-Purple-Sleeveless-Leotard-34.jpg',
+            'https://i.ibb.co/cb1TLph/Bks-Purple-Sleeveless-Leotard-35.jpg',
+            'https://i.ibb.co/JcbWs87/Bks-Purple-Sleeveless-Leotard-36.jpg',
+            'https://i.ibb.co/6w5DGMQ/Bks-Purple-Sleeveless-Leotard-37.jpg',
+            'https://i.ibb.co/8n38phg/Bks-Purple-Sleeveless-Leotard-38.jpg',
+            'https://i.ibb.co/HCt9nDL/Bks-Purple-Sleeveless-Leotard-39.jpg',
+            'https://i.ibb.co/Tq82yZd/Bks-Purple-Sleeveless-Leotard-40.jpg',
+            'https://i.ibb.co/X5yJGHN/Bks-Purple-Sleeveless-Leotard-41.jpg',
+            'https://i.ibb.co/f1Xbpmb/Bks-Purple-Sleeveless-Leotard-42.jpg',
+            'https://i.ibb.co/sKQs4hw/Bks-Purple-Sleeveless-Leotard-43.jpg',
+            'https://i.ibb.co/znrHVwC/Bks-Purple-Sleeveless-Leotard-44.jpg',
+            'https://i.ibb.co/TbBNYF0/Bks-Purple-Sleeveless-Leotard-45.jpg',
+            'https://i.ibb.co/zVRcfZB/Bks-Purple-Sleeveless-Leotard-46.jpg',
+            'https://i.ibb.co/WxHNcCf/Bks-Purple-Sleeveless-Leotard-47.jpg',
+            'https://i.ibb.co/vjBWLmy/Bks-Purple-Sleeveless-Leotard-48.jpg',
+            'https://i.ibb.co/3mSrs8W/Bks-Purple-Sleeveless-Leotard-49.jpg',
+            'https://i.ibb.co/3TqThN3/Bks-Purple-Sleeveless-Leotard-50.jpg',
+            'https://i.ibb.co/5rjSFgR/Bks-Purple-Sleeveless-Leotard-51.jpg',
+            'https://i.ibb.co/6JTrKN6/Bks-Purple-Sleeveless-Leotard-52.jpg',
+            'https://i.ibb.co/vBYmK2q/Bks-Purple-Sleeveless-Leotard-53.jpg',
+            'https://i.ibb.co/qpVH828/Bks-Purple-Sleeveless-Leotard-54.jpg',
+            'https://i.ibb.co/rGxf6vc/Bks-Purple-Sleeveless-Leotard-55.jpg',
+            'https://i.ibb.co/V9pyny0/Bks-Purple-Sleeveless-Leotard-56.jpg',
+            'https://i.ibb.co/4WSwPXv/Bks-Purple-Sleeveless-Leotard-57.jpg',
+            'https://i.ibb.co/rf66BdQ/Bks-Purple-Sleeveless-Leotard-58.jpg',
+            'https://i.ibb.co/1R9Ptbv/Bks-Purple-Sleeveless-Leotard-59.jpg',
+            'https://i.ibb.co/PDtMq60/Bks-Purple-Sleeveless-Leotard-60.jpg',
+            'https://i.ibb.co/GFyB10Y/Bks-Purple-Sleeveless-Leotard-61.jpg',
+            'https://i.ibb.co/MgDcp0C/Bks-Purple-Sleeveless-Leotard-62.jpg',
+            'https://i.ibb.co/jwdcP6y/Bks-Purple-Sleeveless-Leotard-63.jpg',
+            'https://i.ibb.co/D4ChTys/Bks-Purple-Sleeveless-Leotard-64.jpg',
+            'https://i.ibb.co/G3R5JzJ/Bks-Purple-Sleeveless-Leotard-65.jpg',
+            'https://i.ibb.co/PtczDZb/Bks-Purple-Sleeveless-Leotard-66.jpg',
+            'https://i.ibb.co/wgCqkmg/Bks-Purple-Sleeveless-Leotard-67.jpg',
+            'https://i.ibb.co/hYCPYCz/Bks-Purple-Sleeveless-Leotard-68.jpg',
+            'https://i.ibb.co/FJCYnMP/Bks-Purple-Sleeveless-Leotard-69.jpg'
+        ];
+
+
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
