@@ -1,1 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 2</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Milano Pink Sleevless Leotard Album 2</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/Jv8QSsR/Milano-Pink-Sleeveless-Leotard-S2-1.jpg',
+            'https://i.ibb.co/xSmFStx/Milano-Pink-Sleeveless-Leotard-S2-2.jpg',
+            'https://i.ibb.co/VvZ4Pz9/Milano-Pink-Sleeveless-Leotard-S2-3.jpg',
+            'https://i.ibb.co/99yhX6Q/Milano-Pink-Sleeveless-Leotard-S2-4.jpg',
+            'https://i.ibb.co/6NG7FDG/Milano-Pink-Sleeveless-Leotard-S2-5.jpg',
+            'https://i.ibb.co/h8tWSqY/Milano-Pink-Sleeveless-Leotard-S2-6.jpg',
+            'https://i.ibb.co/C1fbPmX/Milano-Pink-Sleeveless-Leotard-S2-7.jpg',
+            'https://i.ibb.co/8XcQpPV/Milano-Pink-Sleeveless-Leotard-S2-8.jpg',
+            'https://i.ibb.co/CnbNW6T/Milano-Pink-Sleeveless-Leotard-S2-9.jpg',
+            'https://i.ibb.co/D9Ch1zp/Milano-Pink-Sleeveless-Leotard-S2-10.jpg',
+            'https://i.ibb.co/pQ5cgPk/Milano-Pink-Sleeveless-Leotard-S2-11.jpg',
+            'https://i.ibb.co/Sf6Tc4G/Milano-Pink-Sleeveless-Leotard-S2-12.jpg',
+            'https://i.ibb.co/bKMGyZZ/Milano-Pink-Sleeveless-Leotard-S2-13.jpg',
+            'https://i.ibb.co/nbZ09NM/Milano-Pink-Sleeveless-Leotard-S2-14.jpg',
+            'https://i.ibb.co/q9hCgqv/Milano-Pink-Sleeveless-Leotard-S2-15.jpg',
+            'https://i.ibb.co/7C1B8rM/Milano-Pink-Sleeveless-Leotard-S2-16.jpg',
+            'https://i.ibb.co/4mXcPLK/Milano-Pink-Sleeveless-Leotard-S2-17.jpg',
+            'https://i.ibb.co/c2PDnqh/Milano-Pink-Sleeveless-Leotard-S2-18.jpg',
+            'https://i.ibb.co/Gc4hLyX/Milano-Pink-Sleeveless-Leotard-S2-19.jpg',
+            'https://i.ibb.co/RQ1y8w1/Milano-Pink-Sleeveless-Leotard-S2-20.jpg',
+            'https://i.ibb.co/jRCxF8b/Milano-Pink-Sleeveless-Leotard-S2-21.jpg',
+            'https://i.ibb.co/23Hc5ST/Milano-Pink-Sleeveless-Leotard-S2-22.jpg',
+            'https://i.ibb.co/LtHW93x/Milano-Pink-Sleeveless-Leotard-S2-23.jpg',
+            'https://i.ibb.co/cgPcFLL/Milano-Pink-Sleeveless-Leotard-S2-24.jpg',
+            'https://i.ibb.co/hB5ttnm/Milano-Pink-Sleeveless-Leotard-S2-25.jpg',
+            'https://i.ibb.co/TYpFMV7/Milano-Pink-Sleeveless-Leotard-S2-26.jpg',
+            'https://i.ibb.co/wRyRsLw/Milano-Pink-Sleeveless-Leotard-S2-27.jpg',
+            'https://i.ibb.co/qNWr6Ln/Milano-Pink-Sleeveless-Leotard-S2-28.jpg',
+            'https://i.ibb.co/1RB04dF/Milano-Pink-Sleeveless-Leotard-S2-29.jpg',
+            'https://i.ibb.co/bNt5PHz/Milano-Pink-Sleeveless-Leotard-S2-30.jpg',
+            'https://i.ibb.co/JcgbFDT/Milano-Pink-Sleeveless-Leotard-S2-31.jpg',
+            'https://i.ibb.co/QCWzdw0/Milano-Pink-Sleeveless-Leotard-S2-32.jpg',
+            'https://i.ibb.co/r7VnLmH/Milano-Pink-Sleeveless-Leotard-S2-33.jpg',
+            'https://i.ibb.co/Nnvf500/Milano-Pink-Sleeveless-Leotard-S2-34.jpg',
+            'https://i.ibb.co/wg5wXVt/Milano-Pink-Sleeveless-Leotard-S2-35.jpg',
+            'https://i.ibb.co/sbK0jSN/Milano-Pink-Sleeveless-Leotard-S2-36.jpg',
+            'https://i.ibb.co/NKqLx5M/Milano-Pink-Sleeveless-Leotard-S2-37.jpg',
+            'https://i.ibb.co/hLSc3h9/Milano-Pink-Sleeveless-Leotard-S2-38.jpg',
+            'https://i.ibb.co/FYfWt9B/Milano-Pink-Sleeveless-Leotard-S2-39.jpg'
+        ];
+
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
