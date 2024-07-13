@@ -1,1 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 3</title>
+    <link rel="stylesheet" href="../styles.css">
 
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Milano Purple Sleeved Leotard Album 3</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+						'https://i.ibb.co/tDV5TSd/Milano-Purple-Sleeved-Leotard-S3-1.jpg',
+						'https://i.ibb.co/5LcZYg6/Milano-Purple-Sleeved-Leotard-S3-2.jpg',
+						'https://i.ibb.co/R72fcTz/Milano-Purple-Sleeved-Leotard-S3-3.jpg',
+						'https://i.ibb.co/dJC2cv0/Milano-Purple-Sleeved-Leotard-S3-4.jpg',
+						'https://i.ibb.co/8myh0xR/Milano-Purple-Sleeved-Leotard-S3-5.jpg',
+						'https://i.ibb.co/NLtMn7z/Milano-Purple-Sleeved-Leotard-S3-6.jpg',
+						'https://i.ibb.co/BPc9xQy/Milano-Purple-Sleeved-Leotard-S3-7.jpg',
+						'https://i.ibb.co/wyBr2X6/Milano-Purple-Sleeved-Leotard-S3-8.jpg',
+						'https://i.ibb.co/nk7Wf2n/Milano-Purple-Sleeved-Leotard-S3-9.jpg',
+						'https://i.ibb.co/TwMnHd2/Milano-Purple-Sleeved-Leotard-S3-10.jpg',
+						'https://i.ibb.co/dr6PdfW/Milano-Purple-Sleeved-Leotard-S3-11.jpg',
+						'https://i.ibb.co/XxV5rfR/Milano-Purple-Sleeved-Leotard-S3-12.jpg',
+						'https://i.ibb.co/d4Lhwz3/Milano-Purple-Sleeved-Leotard-S3-13.jpg',
+						'https://i.ibb.co/0fnyBVt/Milano-Purple-Sleeved-Leotard-S3-14.jpg',
+						'https://i.ibb.co/5MTDtYj/Milano-Purple-Sleeved-Leotard-S3-15.jpg',
+						'https://i.ibb.co/w4Gn7BF/Milano-Purple-Sleeved-Leotard-S3-16.jpg',
+						'https://i.ibb.co/t8cWqfw/Milano-Purple-Sleeved-Leotard-S3-17.jpg',
+						'https://i.ibb.co/XzpJyNV/Milano-Purple-Sleeved-Leotard-S3-18.jpg',
+						'https://i.ibb.co/QQPQhGs/Milano-Purple-Sleeved-Leotard-S3-19.jpg',
+						'https://i.ibb.co/G2ZB8Ms/Milano-Purple-Sleeved-Leotard-S3-20.jpg',
+						'https://i.ibb.co/hKD3SYs/Milano-Purple-Sleeved-Leotard-S3-21.jpg',
+						'https://i.ibb.co/G91zYVG/Milano-Purple-Sleeved-Leotard-S3-22.jpg',
+						'https://i.ibb.co/qrHTMF7/Milano-Purple-Sleeved-Leotard-S3-23.jpg',
+						'https://i.ibb.co/wLDfJh7/Milano-Purple-Sleeved-Leotard-S3-24.jpg',
+						'https://i.ibb.co/qxSjt92/Milano-Purple-Sleeved-Leotard-S3-25.jpg',
+						'https://i.ibb.co/wdnL2WX/Milano-Purple-Sleeved-Leotard-S3-26.jpg',
+						'https://i.ibb.co/bPHVwxN/Milano-Purple-Sleeved-Leotard-S3-27.jpg',
+						'https://i.ibb.co/VtGZTrx/Milano-Purple-Sleeved-Leotard-S3-28.jpg',
+						'https://i.ibb.co/9qKZwn5/Milano-Purple-Sleeved-Leotard-S3-29.jpg',
+						'https://i.ibb.co/fNGY9Xr/Milano-Purple-Sleeved-Leotard-S3-30.jpg',
+						'https://i.ibb.co/ydYqp5v/Milano-Purple-Sleeved-Leotard-S3-31.jpg',
+						'https://i.ibb.co/3cCz3jd/Milano-Purple-Sleeved-Leotard-S3-32.jpg',
+						'https://i.ibb.co/vZ62Ht3/Milano-Purple-Sleeved-Leotard-S3-33.jpg',
+						'https://i.ibb.co/5hqDw2y/Milano-Purple-Sleeved-Leotard-S3-34.jpg',
+						'https://i.ibb.co/MZPYWCk/Milano-Purple-Sleeved-Leotard-S3-35.jpg',
+						'https://i.ibb.co/DCLSqgw/Milano-Purple-Sleeved-Leotard-S3-36.jpg',
+						'https://i.ibb.co/6RGsrQ7/Milano-Purple-Sleeved-Leotard-S3-37.jpg',
+						'https://i.ibb.co/p19hPTn/Milano-Purple-Sleeved-Leotard-S3-38.jpg',
+						'https://i.ibb.co/svs26Ds/Milano-Purple-Sleeved-Leotard-S3-39.jpg',
+						'https://i.ibb.co/C5n33jp/Milano-Purple-Sleeved-Leotard-S3-40.jpg',
+						'https://i.ibb.co/fQDLmMT/Milano-Purple-Sleeved-Leotard-S3-41.jpg',
+						'https://i.ibb.co/vzkjTss/Milano-Purple-Sleeved-Leotard-S3-42.jpg',
+						'https://i.ibb.co/9TsFrjZ/Milano-Purple-Sleeved-Leotard-S3-43.jpg',
+						'https://i.ibb.co/F3v217G/Milano-Purple-Sleeved-Leotard-S3-44.jpg',
+						'https://i.ibb.co/P6nBMLr/Milano-Purple-Sleeved-Leotard-S3-45.jpg',
+						'https://i.ibb.co/Tk8d4Sy/Milano-Purple-Sleeved-Leotard-S3-46.jpg',
+						'https://i.ibb.co/B2jm8g1/Milano-Purple-Sleeved-Leotard-S3-47.jpg',
+						'https://i.ibb.co/5ny9pDY/Milano-Purple-Sleeved-Leotard-S3-48.jpg',
+						'https://i.ibb.co/YWsMf7v/Milano-Purple-Sleeved-Leotard-S3-49.jpg',
+						'https://i.ibb.co/7Sdy88z/Milano-Purple-Sleeved-Leotard-S3-50.jpg',
+						'https://i.ibb.co/PgMNyzQ/Milano-Purple-Sleeved-Leotard-S3-51.jpg',
+						'https://i.ibb.co/xf9PkjH/Milano-Purple-Sleeved-Leotard-S3-52.jpg',
+						'https://i.ibb.co/DC8NtL1/Milano-Purple-Sleeved-Leotard-S3-53.jpg',
+						'https://i.ibb.co/zSMtNKr/Milano-Purple-Sleeved-Leotard-S3-54.jpg',
+						'https://i.ibb.co/rcV6vpc/Milano-Purple-Sleeved-Leotard-S3-55.jpg',
+						'https://i.ibb.co/LpXFw68/Milano-Purple-Sleeved-Leotard-S3-56.jpg',
+						'https://i.ibb.co/MCLBx01/Milano-Purple-Sleeved-Leotard-S3-57.jpg',
+						'https://i.ibb.co/fQvGmPp/Milano-Purple-Sleeved-Leotard-S3-58.jpg',
+						'https://i.ibb.co/cwyLRZH/Milano-Purple-Sleeved-Leotard-S3-59.jpg',
+						'https://i.ibb.co/nPqJDcf/Milano-Purple-Sleeved-Leotard-S3-60.jpg',
+						'https://i.ibb.co/7bWqFs6/Milano-Purple-Sleeved-Leotard-S3-61.jpg',
+						'https://i.ibb.co/P1R27F6/Milano-Purple-Sleeved-Leotard-S3-62.jpg',
+						'https://i.ibb.co/9qP2Dv8/Milano-Purple-Sleeved-Leotard-S3-63.jpg',
+						'https://i.ibb.co/6gcpzcT/Milano-Purple-Sleeved-Leotard-S3-64.jpg',
+						'https://i.ibb.co/3rTkhrm/Milano-Purple-Sleeved-Leotard-S3-65.jpg',
+						'https://i.ibb.co/sqXyRFF/Milano-Purple-Sleeved-Leotard-S3-66.jpg',
+						'https://i.ibb.co/QJxrwRS/Milano-Purple-Sleeved-Leotard-S3-67.jpg',
+						'https://i.ibb.co/8rtxd16/Milano-Purple-Sleeved-Leotard-S3-68.jpg',
+						'https://i.ibb.co/3cgnT1k/Milano-Purple-Sleeved-Leotard-S3-69.jpg',
+						'https://i.ibb.co/dK23b17/Milano-Purple-Sleeved-Leotard-S3-70.jpg',
+						'https://i.ibb.co/ngqw4fH/Milano-Purple-Sleeved-Leotard-S3-71.jpg',
+						'https://i.ibb.co/tc2kxBX/Milano-Purple-Sleeved-Leotard-S3-72.jpg',
+						'https://i.ibb.co/sVz5fBn/Milano-Purple-Sleeved-Leotard-S3-73.jpg',
+						'https://i.ibb.co/4NYJxcr/Milano-Purple-Sleeved-Leotard-S3-74.jpg',
+						'https://i.ibb.co/wwhk3xD/Milano-Purple-Sleeved-Leotard-S3-75.jpg',
+						'https://i.ibb.co/Zhk2Jd0/Milano-Purple-Sleeved-Leotard-S3-76.jpg',
+						'https://i.ibb.co/X3W3Rq1/Milano-Purple-Sleeved-Leotard-S3-77.jpg',
+						'https://i.ibb.co/T4RZ1QZ/Milano-Purple-Sleeved-Leotard-S3-78.jpg',
+						'https://i.ibb.co/TK1Xsnj/Milano-Purple-Sleeved-Leotard-S3-79.jpg',
+						'https://i.ibb.co/StkMN4s/Milano-Purple-Sleeved-Leotard-S3-80.jpg',
+						'https://i.ibb.co/s5LnGYd/Milano-Purple-Sleeved-Leotard-S3-81.jpg',
+						'https://i.ibb.co/09rwL4F/Milano-Purple-Sleeved-Leotard-S3-82.jpg',
+						'https://i.ibb.co/zbZzBLn/Milano-Purple-Sleeved-Leotard-S3-83.jpg',
+						'https://i.ibb.co/C000FJY/Milano-Purple-Sleeved-Leotard-S3-84.jpg',
+						'https://i.ibb.co/FX8ddSF/Milano-Purple-Sleeved-Leotard-S3-85.jpg',
+						'https://i.ibb.co/QjHGqLT/Milano-Purple-Sleeved-Leotard-S3-86.jpg',
+						'https://i.ibb.co/y0978VN/Milano-Purple-Sleeved-Leotard-S3-87.jpg',
+						'https://i.ibb.co/jL7tbYv/Milano-Purple-Sleeved-Leotard-S3-88.jpg',
+						'https://i.ibb.co/PY5f13k/Milano-Purple-Sleeved-Leotard-S3-89.jpg',
+						'https://i.ibb.co/LvzPXTK/Milano-Purple-Sleeved-Leotard-S3-90.jpg',
+						'https://i.ibb.co/9wkpp6m/Milano-Purple-Sleeved-Leotard-S3-91.jpg',
+						'https://i.ibb.co/0rCWYkq/Milano-Purple-Sleeved-Leotard-S3-92.jpg',
+						'https://i.ibb.co/9qNm49s/Milano-Purple-Sleeved-Leotard-S3-93.jpg',
+						'https://i.ibb.co/TY9M7Wr/Milano-Purple-Sleeved-Leotard-S3-94.jpg',
+						'https://i.ibb.co/dPCxqyL/Milano-Purple-Sleeved-Leotard-S3-95.jpg',
+						'https://i.ibb.co/GtyLhLz/Milano-Purple-Sleeved-Leotard-S3-96.jpg',
+						'https://i.ibb.co/gjKvqVF/Milano-Purple-Sleeved-Leotard-S3-97.jpg',
+						'https://i.ibb.co/FYFSwnq/Milano-Purple-Sleeved-Leotard-S3-98.jpg',
+						'https://i.ibb.co/w48h45B/Milano-Purple-Sleeved-Leotard-S3-99.jpg',
+						'https://i.ibb.co/gtF7g6K/Milano-Purple-Sleeved-Leotard-S3-100.jpg'
+        ];
+
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
