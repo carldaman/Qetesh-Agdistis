@@ -125,8 +125,6 @@
             <div class="toolbar">
                 <button onclick="previousPage()">Previous</button>
                 <button onclick="nextPage()">Next</button>
-                <button onclick="nextPage()">Next</button>
-                <button onclick="goToEnd()">End</button>
             </div>
         </section>
     </main>
@@ -246,17 +244,6 @@
             }
         }
         
-        function goToStart() {
-            currentPage = 1;
-            displayPhotos();
-        }
-
-        function goToEnd() {
-            currentPage = Math.ceil(photos.length / photosPerPage);
-            displayPhotos();
-        }
-        
-
         // Initial display
         displayPhotos();
     </script>
