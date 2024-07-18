@@ -200,10 +200,10 @@
             'https://i.ibb.co/jh7Mj3B/Long-Sleeve-Realise-Swimsuit-S7-53.jpg',
             'https://i.ibb.co/MDWT2Qj/Long-Sleeve-Realise-Swimsuit-S7-54.jpg'
         ];
-
-        let currentPhotoIndex = 0;
+ 
         let currentPage = 1;
         const photosPerPage = 5;
+        const totalPages = Math.ceil(photos.length / photosPerPage);   
 
         function displayPhotos() {
             const albumPhotos = document.getElementById('album-photos');
