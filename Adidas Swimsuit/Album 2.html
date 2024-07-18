@@ -174,6 +174,9 @@
                 img.onclick = () => openLightbox(photos.indexOf(photo));
                 albumPhotos.appendChild(img);
             });
+
+            // Update page indicator
+            document.getElementById('page-indicator').innerText = `Page ${currentPage} of ${totalPages}`;
         }
 
         function openLightbox(index) {
