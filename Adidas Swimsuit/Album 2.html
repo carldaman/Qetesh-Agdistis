@@ -125,6 +125,7 @@
             <div class="toolbar">
                 <button onclick="previousPage()">Previous</button>
                 <button onclick="nextPage()">Next</button>
+                <span id="page-indicator">Page 1 of 1</span>
             </div>
         </section>
     </main>
@@ -156,6 +157,7 @@
 
         let currentPage = 1;
         const photosPerPage = 5;
+        const totalPages = Math.ceil(photos.length / photosPerPage);
 
         function displayPhotos() {
             const albumPhotos = document.getElementById('album-photos');
