@@ -125,6 +125,7 @@
             <div class="toolbar">
                 <button onclick="previousPage()">Previous</button>
                 <button onclick="nextPage()">Next</button>
+                <span id="page-indicator">Page 1 of 1</span>
             </div>
         </section>
     </main>
@@ -219,6 +220,9 @@
                 img.onclick = () => openLightbox(photos.indexOf(photo));
                 albumPhotos.appendChild(img);
             });
+            
+            // Update page indicator
+            document.getElementById('page-indicator').innerText = `Page ${currentPage} of ${totalPages}`;
         }
 
         function openLightbox(index) {
