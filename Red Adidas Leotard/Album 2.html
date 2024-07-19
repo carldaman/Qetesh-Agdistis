@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 2</title>
+    <link rel="stylesheet" href="../styles.css">
+
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Red Adidas Leotard Album 2</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+                <span id="page-indicator">Page 1 of 1</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>      
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/5LkpWN5/Red-Adidas-Leotard-S2-1.jpg',
+            'https://i.ibb.co/q7XXp62/Red-Adidas-Leotard-S2-2.jpg',
+            'https://i.ibb.co/p1s5scc/Red-Adidas-Leotard-S2-3.jpg',
+            'https://i.ibb.co/gtbNKvj/Red-Adidas-Leotard-S2-4.jpg',
+            'https://i.ibb.co/2gdgqCb/Red-Adidas-Leotard-S2-5.jpg',
+            'https://i.ibb.co/nk51TGj/Red-Adidas-Leotard-S2-6.jpg',
+            'https://i.ibb.co/rsCbm9Y/Red-Adidas-Leotard-S2-7.jpg',
+            'https://i.ibb.co/Wn2FgSF/Red-Adidas-Leotard-S2-8.jpg',
+            'https://i.ibb.co/r6JWWyx/Red-Adidas-Leotard-S2-9.jpg',
+            'https://i.ibb.co/X3Pn2JF/Red-Adidas-Leotard-S2-10.jpg',
+            'https://i.ibb.co/R6fs8py/Red-Adidas-Leotard-S2-11.jpg',
+            'https://i.ibb.co/Zm6bLyM/Red-Adidas-Leotard-S2-12.jpg',
+            'https://i.ibb.co/Zhm1J7k/Red-Adidas-Leotard-S2-13.jpg',
+            'https://i.ibb.co/nz3YbwC/Red-Adidas-Leotard-S2-14.jpg',
+            'https://i.ibb.co/TYQwbj3/Red-Adidas-Leotard-S2-15.jpg',
+            'https://i.ibb.co/SrV1hsD/Red-Adidas-Leotard-S2-16.jpg',
+            'https://i.ibb.co/6mkYzXH/Red-Adidas-Leotard-S2-17.jpg',
+            'https://i.ibb.co/BC6xxzx/Red-Adidas-Leotard-S2-18.jpg',
+            'https://i.ibb.co/PFLxzkw/Red-Adidas-Leotard-S2-19.jpg',
+            'https://i.ibb.co/CQp3m1S/Red-Adidas-Leotard-S2-20.jpg',
+            'https://i.ibb.co/YR24Qv6/Red-Adidas-Leotard-S2-21.jpg',
+            'https://i.ibb.co/PhD5tcx/Red-Adidas-Leotard-S2-22.jpg',
+            'https://i.ibb.co/gV7X6x6/Red-Adidas-Leotard-S2-23.jpg',
+            'https://i.ibb.co/0ygFCzf/Red-Adidas-Leotard-S2-24.jpg',
+            'https://i.ibb.co/kMj4MgH/Red-Adidas-Leotard-S2-25.jpg',
+            'https://i.ibb.co/KFTkS15/Red-Adidas-Leotard-S2-26.jpg',
+            'https://i.ibb.co/YbbPdns/Red-Adidas-Leotard-S2-27.jpg',
+            'https://i.ibb.co/Jx1QJJ3/Red-Adidas-Leotard-S2-28.jpg',
+            'https://i.ibb.co/Wk5JqBQ/Red-Adidas-Leotard-S2-29.jpg',
+            'https://i.ibb.co/TqLPN6K/Red-Adidas-Leotard-S2-30.jpg',
+            'https://i.ibb.co/KzB31cr/Red-Adidas-Leotard-S2-31.jpg',
+            'https://i.ibb.co/CM40Fg2/Red-Adidas-Leotard-S2-32.jpg',
+            'https://i.ibb.co/4SdFf45/Red-Adidas-Leotard-S2-33.jpg',
+            'https://i.ibb.co/PY2PyxT/Red-Adidas-Leotard-S2-34.jpg',
+            'https://i.ibb.co/B3VH8HH/Red-Adidas-Leotard-S2-35.jpg'
+        ];
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+        const totalPages = Math.ceil(photos.length / photosPerPage);
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+
+            // Update page indicator
+            document.getElementById('page-indicator').innerText = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+        
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
