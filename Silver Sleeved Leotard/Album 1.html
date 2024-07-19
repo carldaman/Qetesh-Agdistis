@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 1</title>
+    <link rel="stylesheet" href="../styles.css">
 
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Silver Sleeved Leotard Album 1</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+                <span id="page-indicator">Page 1 of 1</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>      
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/0JcpyT1/Silver-Sleeved-Leotard-1.jpg',
+            'https://i.ibb.co/nbLNVVQ/Silver-Sleeved-Leotard-2.jpg',
+            'https://i.ibb.co/Y85BS5B/Silver-Sleeved-Leotard-3.jpg',
+            'https://i.ibb.co/P40vQV6/Silver-Sleeved-Leotard-4.jpg',
+            'https://i.ibb.co/hfxtXY1/Silver-Sleeved-Leotard-5.jpg',
+            'https://i.ibb.co/zrqhNZj/Silver-Sleeved-Leotard-6.jpg',
+            'https://i.ibb.co/CnJxBxK/Silver-Sleeved-Leotard-7.jpg',
+            'https://i.ibb.co/3FCJNFT/Silver-Sleeved-Leotard-8.jpg',
+            'https://i.ibb.co/LRbQbHT/Silver-Sleeved-Leotard-9.jpg',
+            'https://i.ibb.co/1ndqhwJ/Silver-Sleeved-Leotard-10.jpg',
+            'https://i.ibb.co/L1ZKWwD/Silver-Sleeved-Leotard-11.jpg',
+            'https://i.ibb.co/KyYqTnp/Silver-Sleeved-Leotard-12.jpg',
+            'https://i.ibb.co/0V3fKKT/Silver-Sleeved-Leotard-13.jpg',
+            'https://i.ibb.co/fNzyFb5/Silver-Sleeved-Leotard-14.jpg',
+            'https://i.ibb.co/kMNRGbd/Silver-Sleeved-Leotard-15.jpg',
+            'https://i.ibb.co/PD6zpxS/Silver-Sleeved-Leotard-16.jpg',
+            'https://i.ibb.co/frqw7gD/Silver-Sleeved-Leotard-17.jpg',
+            'https://i.ibb.co/hZzYPzW/Silver-Sleeved-Leotard-18.jpg',
+            'https://i.ibb.co/LdwLyx2/Silver-Sleeved-Leotard-19.jpg',
+            'https://i.ibb.co/hLXmY7V/Silver-Sleeved-Leotard-20.jpg',
+            'https://i.ibb.co/mStspdv/Silver-Sleeved-Leotard-21.jpg',
+            'https://i.ibb.co/Lh1FnL0/Silver-Sleeved-Leotard-22.jpg',
+            'https://i.ibb.co/yQ4mPVQ/Silver-Sleeved-Leotard-23.jpg',
+            'https://i.ibb.co/H2PHptN/Silver-Sleeved-Leotard-24.jpg',
+            'https://i.ibb.co/bzxs55F/Silver-Sleeved-Leotard-25.jpg'
+        ];
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+        const totalPages = Math.ceil(photos.length / photosPerPage);
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+
+            // Update page indicator
+            document.getElementById('page-indicator').innerText = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+        
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
