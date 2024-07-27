@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 1</title>
+    <link rel="stylesheet" href="../styles.css">
+
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Speedo Black S2000 Swimsuit Album 1</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+                <span id="page-indicator">Page 1 of 1</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>      
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/BfLFJRx/Speedo-Black-Aquablade-Swimsuit-S1-1.jpg',
+            'https://i.ibb.co/ck8njZC/Speedo-Black-S2000-1.jpg',
+            'https://i.ibb.co/y0dXWGn/Speedo-Black-S2000-2.jpg',
+            'https://i.ibb.co/mHh47B4/Speedo-Black-S2000-3.jpg',
+            'https://i.ibb.co/vh1g6dk/Speedo-Black-S2000-4.jpg',
+            'https://i.ibb.co/St5Q81G/Speedo-Black-S2000-5.jpg',
+            'https://i.ibb.co/RYPSsS7/Speedo-Black-S2000-6.jpg',
+            'https://i.ibb.co/gvBChTj/Speedo-Black-S2000-7.jpg',
+            'https://i.ibb.co/wsc1WNm/Speedo-Black-S2000-8.jpg',
+            'https://i.ibb.co/t8pHcBc/Speedo-Black-S2000-9.jpg',
+            'https://i.ibb.co/JK358jC/Speedo-Black-S2000-10.jpg',
+            'https://i.ibb.co/w43tqPD/Speedo-Black-S2000-11.jpg',
+            'https://i.ibb.co/D4HP2k4/Speedo-Black-S2000-12.jpg',
+            'https://i.ibb.co/yprq3z7/Speedo-Black-S2000-13.jpg',
+            'https://i.ibb.co/gt1Mmf2/Speedo-Black-S2000-14.jpg',
+            'https://i.ibb.co/9Wbb6q7/Speedo-Black-S2000-15.jpg',
+            'https://i.ibb.co/BrYHMjn/Speedo-Black-S2000-16.jpg',
+            'https://i.ibb.co/44xy0T4/Speedo-Black-S2000-17.jpg',
+            'https://i.ibb.co/MGX1FtC/Speedo-Black-S2000-18.jpg',
+            'https://i.ibb.co/4FjHGDv/Speedo-Black-S2000-19.jpg',
+            'https://i.ibb.co/pb8hPCn/Speedo-Black-S2000-20.jpg',
+            'https://i.ibb.co/09ZDs5F/Speedo-Black-S2000-21.jpg',
+            'https://i.ibb.co/85VpRYZ/Speedo-Black-S2000-22.jpg',
+            'https://i.ibb.co/NngPgzv/Speedo-Black-S2000-23.jpg',
+            'https://i.ibb.co/C7Lrnrm/Speedo-Black-S2000-24.jpg',
+            'https://i.ibb.co/9w8GbvS/Speedo-Black-S2000-25.jpg',
+            'https://i.ibb.co/MkpgJCq/Speedo-Black-S2000-26.jpg',
+            'https://i.ibb.co/n3Kr4X3/Speedo-Black-S2000-27.jpg',
+            'https://i.ibb.co/NFr1Hwp/Speedo-Black-S2000-28.jpg',
+            'https://i.ibb.co/wCkXGgY/Speedo-Black-S2000-29.jpg',
+            'https://i.ibb.co/8jMYJY3/Speedo-Black-S2000-30.jpg',
+            'https://i.ibb.co/mN5vZwk/Speedo-Black-S2000-31.jpg',
+            'https://i.ibb.co/khZcSPd/Speedo-Black-S2000-32.jpg',
+            'https://i.ibb.co/9cRZL0f/Speedo-Black-S2000-33.jpg',
+            'https://i.ibb.co/gvN5yKF/Speedo-Black-S2000-34.jpg',
+            'https://i.ibb.co/dMmR1w6/Speedo-Black-S2000-35.jpg',
+            'https://i.ibb.co/x77TrX2/Speedo-Black-S2000-36.jpg',
+            'https://i.ibb.co/dKV9FZM/Speedo-Black-S2000-37.jpg',
+            'https://i.ibb.co/9qRkd96/Speedo-Black-S2000-38.jpg',
+            'https://i.ibb.co/xgK95vh/Speedo-Black-S2000-39.jpg',
+            'https://i.ibb.co/j3gzZyG/Speedo-Black-S2000-40.jpg',
+            'https://i.ibb.co/Cb1MVx0/Speedo-Black-S2000-41.jpg',
+            'https://i.ibb.co/r4XRRV4/Speedo-Black-S2000-42.jpg',
+            'https://i.ibb.co/mCPv45H/Speedo-Black-S2000-43.jpg',
+            'https://i.ibb.co/WtYNDvP/Speedo-Black-S2000-44.jpg',
+            'https://i.ibb.co/pRFc3dT/Speedo-Black-S2000-45.jpg',
+            'https://i.ibb.co/D1b8xbK/Speedo-Black-S2000-46.jpg',
+            'https://i.ibb.co/mSytfzR/Speedo-Black-S2000-47.jpg',
+            'https://i.ibb.co/gg35B17/Speedo-Black-S2000-48.jpg',
+            'https://i.ibb.co/ckwv78H/Speedo-Black-S2000-49.jpg',
+            'https://i.ibb.co/dLGGHSH/Speedo-Black-S2000-50.jpg',
+            'https://i.ibb.co/KjTTkNt/Speedo-Black-S2000-51.jpg',
+            'https://i.ibb.co/LQPfmcm/Speedo-Black-S2000-52.jpg',
+            'https://i.ibb.co/VpqKntq/Speedo-Black-S2000-53.jpg',
+            'https://i.ibb.co/4NQP1pz/Speedo-Black-S2000-54.jpg',
+            'https://i.ibb.co/h2mvNmG/Speedo-Black-S2000-55.jpg',
+            'https://i.ibb.co/5kcBpqk/Speedo-Black-S2000-56.jpg',
+            'https://i.ibb.co/6mmkWfc/Speedo-Black-S2000-57.jpg',
+            'https://i.ibb.co/qjj654h/Speedo-Black-S2000-58.jpg',
+            'https://i.ibb.co/2vhWfrv/Speedo-Black-S2000-59.jpg',
+            'https://i.ibb.co/zJvmc79/Speedo-Black-S2000-60.jpg',
+            'https://i.ibb.co/2Kn1XVt/Speedo-Black-S2000-61.jpg',
+            'https://i.ibb.co/5TbyJkg/Speedo-Black-S2000-62.jpg',
+            'https://i.ibb.co/PFdvnKZ/Speedo-Black-S2000-63.jpg',
+            'https://i.ibb.co/3WfrfW5/Speedo-Black-S2000-64.jpg',
+            'https://i.ibb.co/6bnvKCS/Speedo-Black-S2000-65.jpg',
+            'https://i.ibb.co/xmY26rK/Speedo-Black-S2000-66.jpg',
+            'https://i.ibb.co/LvRc4pB/Speedo-Black-S2000-67.jpg',
+            'https://i.ibb.co/bFm91fz/Speedo-Black-S2000-68.jpg',
+            'https://i.ibb.co/F0ywHBm/Speedo-Black-S2000-69.jpg',
+            'https://i.ibb.co/CBr1gsF/Speedo-Black-S2000-70.jpg',
+            'https://i.ibb.co/N9kMg2h/Speedo-Black-S2000-71.jpg',
+            'https://i.ibb.co/whHsStZ/Speedo-Black-S2000-72.jpg',
+            'https://i.ibb.co/N7J7N7q/Speedo-Black-S2000-73.jpg'
+        ];
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+        const totalPages = Math.ceil(photos.length / photosPerPage);
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+
+            // Update page indicator
+            document.getElementById('page-indicator').innerText = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+        
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
