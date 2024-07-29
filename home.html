@@ -47,6 +47,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            text-align: center;
         }
 
         .enlarged-image {
@@ -56,8 +57,16 @@
 
         .enlarged-image-description {
             color: white;
-            text-align: center;
             margin-top: 10px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
         }
     </style>
 
@@ -132,6 +141,7 @@
                     </div>
                     
                     <div class="enlarged-image-container" id="enlargedImageContainer" onclick="closeEnlargedImage()">
+                        <div class="close-button" onclick="event.stopPropagation(); closeEnlargedImage();">&times;</div>
                         <img class="enlarged-image" id="enlargedImage" src="" alt="Enlarged Image">
                         <p class="enlarged-image-description" id="enlargedImageDescription"></p>
                     </div>
@@ -173,14 +183,29 @@
         </section>
     </main>
 
-    <footer>
+ <footer>
         <div style="text-align: center; padding: 10px;">
             <p>&copy; 2024 Qetesh-Agdistis. All images and content are the property of qetesh-agdistis.com. Unauthorized use prohibited.</p>
            <p>Contact: <a href="contact.html" style="color: green;">Contact Page</a></p>
         </div>
     </footer>
 
-    <!-- Optional: JavaScript file if you have additional scripts -->
-    <!-- <script src="script.js"></script> -->
+    <!-- JavaScript to handle image enlargement and closing -->
+    <script>
+        function enlargeImage(src, description) {
+            const enlargedImageContainer = document.getElementById('enlargedImageContainer');
+            const enlargedImage = document.getElementById('enlargedImage');
+            const enlargedImageDescription = document.getElementById('enlargedImageDescription');
+
+            enlargedImage.src = src;
+            enlargedImageDescription.textContent = description;
+            enlargedImageContainer.style.display = 'flex';
+        }
+
+        function closeEnlargedImage() {
+            const enlargedImageContainer = document.getElementById('enlargedImageContainer');
+            enlargedImageContainer.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
