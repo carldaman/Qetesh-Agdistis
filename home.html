@@ -28,11 +28,36 @@
             width: 100%;
             height: 100%;
             object-fit: cover; /* Ensure the image covers the entire container */
+            cursor: pointer; /* Change cursor to pointer on hover */
         }
 
         .main-content {
             padding: 20px;
             margin-bottom: 100px; /* Ensure there's enough space for the footer */
+        }
+
+        .enlarged-image-container {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .enlarged-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .enlarged-image-description {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
 
@@ -42,7 +67,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-5FTEC93L1H');
     </script>
 </head>
@@ -51,11 +75,11 @@
         <div class="logo">
             <a href="home.html"><img src="website photos/123.png" alt="Logo"></a>
         </div>
-    <center>
-        <h1>Welcome to Qetesh Agdistis</h1>
-        <h4>Discover the elegance and allure of swimsuits, leotards, latex, lingerie, and stockings with Qetesh Agdistis</h4>
-        <h4>Where fashion meets fantasy</h4>
-     </center>
+        <center>
+            <h1>Welcome to Qetesh Agdistis</h1>
+            <h4>Discover the elegance and allure of swimsuits, leotards, latex, lingerie, and stockings with Qetesh Agdistis</h4>
+            <h4>Where fashion meets fantasy</h4>
+        </center>
         <nav>
             <ul>
                 <li><a href="home.html">Home</a></li>
@@ -76,56 +100,52 @@
             <h2><u>News Updates</u></h2>
             <div id="news-container">
                 <div class="news-item">
-
-                    
                     <h3>August 2024</h3>
-                    <p>More images uploaded, Speedo collection like Fastskin, S2000 and aquablade
-                    <br>swimsuits, be warned as some photos contain sex toys.</p>
+                    <p>More images uploaded, Speedo collection like Fastskin, S2000 and aquablade swimsuits, be warned as some photos contain sex toys.</p>
+                    <p>I have also purchased the king Cock Chubby 9" dildo which is huge.
+                        <br>I will hopefully be using with a reciprocating cycle linear actuator machine,
+                        <br>its a cheaper version of a sex machine that I purchased from ebay,
+                        <br>I will be using a smaller dildo first from the King Cock
+                        <br>brand first to warm me up. have a look at the pictures below:</p>
                     
-                    <p></I have also purchased the king Cock Chubby 9" dildo which is huge.
-                    <br>I will hopefully be using with a reciprocating cycle linier actuator machine,
-                    <br>its a cheaper version of a sex machine that I purchased from ebay,
-                    <br>I will be using a smaller dildo first from the King Cock
-                    <br>brand first to warm me up. have a look at the pictures below:</p>
-                        
                     <div id="images-container">
-                         <div class="image-item">
-                            <img src="website photos/King Cock Chubby 9inch (1).jpeg" alt="Image 1">
+                        <div class="image-item">
+                            <img src="website photos/King Cock Chubby 9inch (1).jpeg" alt="Image 1" onclick="enlargeImage('website photos/King Cock Chubby 9inch (1).jpeg', 'King Cock Chubby 9inch Dildo')">
                             <p>King Cock Chubby 9inch Dildo </p>
                         </div>
                         <div class="image-item">
-                            <img src="website photos/King Cock Chubby 9inch (2).jpeg" alt="Image 2">
+                            <img src="website photos/King Cock Chubby 9inch (2).jpeg" alt="Image 2" onclick="enlargeImage('website photos/King Cock Chubby 9inch (2).jpeg', 'King Cock Chubby 9inch Dildo')">
                             <p>King Cock Chubby 9inch Dildo </p>
                         </div>
                         <div class="image-item">
-                            <img src="website photos/King Cock Chubby 9inch (3).jpeg" alt="Image 3">
+                            <img src="website photos/King Cock Chubby 9inch (3).jpeg" alt="Image 3" onclick="enlargeImage('website photos/King Cock Chubby 9inch (3).jpeg', 'King Cock Chubby 9inch Dildo')">
                             <p>King Cock Chubby 9inch Dildo </p>
                         </div>
                         <div class="image-item">
-                            <img src="website photos/King Cock Chubby 9inch (4).jpeg" alt="Image 4">
+                            <img src="website photos/King Cock Chubby 9inch (4).jpeg" alt="Image 4" onclick="enlargeImage('website photos/King Cock Chubby 9inch (4).jpeg', 'King Cock Chubby 9inch Dildo')">
                             <p>King Cock Chubby 9inch Dildo</p>
                         </div>
                         <div class="image-item">
-                            <img src="website photos/reciprocating cycle linier actuator machine.jpg" alt="Image 5">
+                            <img src="website photos/reciprocating cycle linier actuator machine.jpg" alt="Image 5" onclick="enlargeImage('website photos/reciprocating cycle linier actuator machine.jpg', 'Reciprocating Cycle Linier Actuator Machine')">
                             <p>Reciprocating Cycle Linier Actuator Machine</p>
                         </div>
-                        
-
+                    </div>
+                    
+                    <div class="enlarged-image-container" id="enlargedImageContainer" onclick="closeEnlargedImage()">
+                        <img class="enlarged-image" id="enlargedImage" src="" alt="Enlarged Image">
+                        <p class="enlarged-image-description" id="enlargedImageDescription"></p>
+                    </div>
 
                     <h3>July 2024</h3>
                     <p>Videos are being added to the website, be warned as there is some nudity!
-                    <br>Adidas Swimsuit photo album has been added.</p>
-                    
+                        <br>Adidas Swimsuit photo album has been added.</p>
                     <h3>June 2024</h3>
-                    <p>New website is currently being built, please be patient as some parts of the
-                    <br>site may not be working as expected. Thank you for your support</p>
-                    
+                    <p>New website is currently being built, please be patient as some parts of the site may not be working as expected. Thank you for your support</p>
                 </div>
 
                 <div class="news-item">
                     <h3>Please Donate</h3>
-                    <p>All proceeds from donations will be used to support the website and also provide
-                    <br>you with more content, thank you!</p>  
+                    <p>All proceeds from donations will be used to support the website and also provide you with more content, thank you!</p>
                 </div>
             </div>
         </section>
@@ -136,23 +156,20 @@
             <div id="images-container">
                 <div class="image-item">
                     <img src="https://i.ibb.co/6rk7yTK/Quatro-Navy-Pink-Leotard-S2-1.jpg" alt="Image 1">
-                    
                 </div>
                 
                 <div class="image-item">
                     <img src="https://i.ibb.co/k3D8JjH/Long-Sleeve-Realise-Swimsuit-S6-36.jpg" alt="Image 2">
-                    
                 </div>
                 
                 <div class="image-item">
                     <img src="https://i.ibb.co/Hpty9bB/Realise-Swimsuit-S2-35.jpg" alt="Image 3">
-                    
                 </div>
                 
                 <div class="image-item">
                     <img src="https://i.ibb.co/B4gWPFV/Adidas-Swimsuit-S4-14.jpg" alt="Image 4">
-                    
                 </div>
+            </div>
         </section>
     </main>
 
