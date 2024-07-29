@@ -26,7 +26,7 @@
 
         .image-item img {
             width: 100%;
-            height: 100%;
+            height: auto; /* Adjust height to maintain aspect ratio */
             object-fit: cover; /* Ensure the image covers the entire container */
             cursor: pointer; /* Change cursor to pointer on hover */
         }
@@ -67,6 +67,15 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
+        }
+
+        /* Specific styling for news items */
+        .news-item {
+            margin-bottom: 30px; /* Default margin for all news items */
+        }
+
+        .news-item.july-2024 {
+            margin-bottom: 60px; /* Increased margin specifically for July 2024 section */
         }
     </style>
 
@@ -115,20 +124,20 @@
                         <br>I will hopefully be using with a reciprocating cycle linear actuator machine,
                         <br>its a cheaper version of a sex machine that I purchased from ebay,
                         <br>I will be using a smaller dildo first from the King Cock
-                        <br>brand first to warm me up. have a look at the pictures below:</p>
+                        <br>brand first to warm me up. Have a look at the pictures below:</p>
                     
                     <div id="images-container">
                         <div class="image-item">
                             <img src="website photos/King Cock Chubby 9inch (1).jpeg" alt="Image 1" onclick="enlargeImage('website photos/King Cock Chubby 9inch (1).jpeg', 'King Cock Chubby 9inch Dildo')">
-                            <p>King Cock Chubby 9inch Dildo </p>
+                            <p>King Cock Chubby 9inch Dildo</p>
                         </div>
                         <div class="image-item">
                             <img src="website photos/King Cock Chubby 9inch (2).jpeg" alt="Image 2" onclick="enlargeImage('website photos/King Cock Chubby 9inch (2).jpeg', 'King Cock Chubby 9inch Dildo')">
-                            <p>King Cock Chubby 9inch Dildo </p>
+                            <p>King Cock Chubby 9inch Dildo</p>
                         </div>
                         <div class="image-item">
                             <img src="website photos/King Cock Chubby 9inch (3).jpeg" alt="Image 3" onclick="enlargeImage('website photos/King Cock Chubby 9inch (3).jpeg', 'King Cock Chubby 9inch Dildo')">
-                            <p>King Cock Chubby 9inch Dildo </p>
+                            <p>King Cock Chubby 9inch Dildo</p>
                         </div>
                         <div class="image-item">
                             <img src="website photos/King Cock Chubby 9inch (4).jpeg" alt="Image 4" onclick="enlargeImage('website photos/King Cock Chubby 9inch (4).jpeg', 'King Cock Chubby 9inch Dildo')">
@@ -145,21 +154,22 @@
                         <img class="enlarged-image" id="enlargedImage" src="" alt="Enlarged Image">
                         <p class="enlarged-image-description" id="enlargedImageDescription"></p>
                     </div>
+                </div>
 
-                    <div class="news-item july-2024">
+                <div class="news-item july-2024">
                     <h3>July 2024</h3>
                     <p>Videos are being added to the website, be warned as there is some nudity!
                         <br>Adidas Swimsuit photo album has been added.</p>
-                    </div>
-                        
-                    <div class="news-item june-2024">
+                </div>
+
+                <div class="news-item june-2024">
                     <h3>June 2024</h3>
                     <p>New website is currently being built, please be patient as some parts of the site may not be working as expected. Thank you for your support</p>
-                    </div>
+                </div>
 
                 <div class="news-item">
                     <h3>Please Donate</h3>
-                    <p>All proceeds from donations will be used to support the website and also provide you with more content, thank you!</p>
+                    <p>All proceeds from donations will be used to support the website and also provide you with more content. Thank you!</p>
                 </div>
             </div>
         </section>
@@ -190,7 +200,7 @@
  <footer>
         <div style="text-align: center; padding: 10px;">
             <p>&copy; 2024 Qetesh-Agdistis. All images and content are the property of qetesh-agdistis.com. Unauthorized use prohibited.</p>
-           <p>Contact: <a href="contact.html" style="color: green;">Contact Page</a></p>
+            <p>Contact: <a href="contact.html" style="color: green;">Contact Page</a></p>
         </div>
     </footer>
 
@@ -212,4 +222,3 @@
         }
     </script>
 </body>
-</html>
