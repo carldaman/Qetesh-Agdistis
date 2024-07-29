@@ -6,17 +6,6 @@
     <title>Qetesh-Agdistis - Links</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-
-    <!-- Google Analytics script -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-5FTEC93L1H');
-    </script>
-        
         .link-list {
             list-style: none;
             padding: 0;
@@ -30,7 +19,28 @@
             display: block;
             border-radius: 5px;
         }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-content .logo,
+        .header-content nav,
+        .header-content .donate-button {
+            flex: 1;
+        }
+        .header-content .donate-button {
+            text-align: right;
+        }
     </style>
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
 </head>
 <body>
     <header>
@@ -52,39 +62,40 @@
             <div class="donate-button">
                 <a href="donate.html" class="button">Donate</a>
             </div>
-        </header>
-        <main>
-            <section>
-                <h2>Useful Links</h2>
-                <ul class="link-list">
-                    <li>
-                        <p>www.kyosui.net - Japan website for swimsuit fans</p>
-                        <a href="https://www.kyosui.net/">
-                            <img src="website photos/swim_lb.gif" alt="I love competitive swimsuits!">
-                        </a>
-                    </li>
-                    <li>
-                        <p>www.swimsuit-heaven.net - Models wearing swimsuits</p>
-                        <a href="http://www.swimsuit-heaven.net/">
-                            <img src="website photos/Swimsuit Heaven link.png" alt="Swimsuit Heaven">
-                        </a>
-                    </li>
-                    <li>
-                        <p>blog.cultulu.com  - Swimsuit blog & Realise Swimsuit reseller</p>
-                        <a href="https://blog.cultulu.com/en/">
-                            <img src="website photos/Cultulu Link Photo.png" alt="Cultulu">
-                        </a>
-                    </li>
-                    <li>
-                        <p> Hiro Gato - Japan swimsuit brand</p>
-                        <a href="https://hg-swimsuit.com/">
-                            <img src="website photos/Hiro Gato Link.png" alt="Hiro Gato">
-                        </a>
-                    </li>
-                </ul>
-            </section>
-     </main>
-     <footer>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h2>Useful Links</h2>
+            <ul class="link-list">
+                <li>
+                    <p>www.kyosui.net - Japan website for swimsuit fans</p>
+                    <a href="https://www.kyosui.net/">
+                        <img src="website photos/swim_lb.gif" alt="I love competitive swimsuits!">
+                    </a>
+                </li>
+                <li>
+                    <p>www.swimsuit-heaven.net - Models wearing swimsuits</p>
+                    <a href="http://www.swimsuit-heaven.net/">
+                        <img src="website photos/Swimsuit Heaven link.png" alt="Swimsuit Heaven">
+                    </a>
+                </li>
+                <li>
+                    <p>blog.cultulu.com - Swimsuit blog & Realise Swimsuit reseller</p>
+                    <a href="https://blog.cultulu.com/en/">
+                        <img src="website photos/Cultulu Link Photo.png" alt="Cultulu">
+                    </a>
+                </li>
+                <li>
+                    <p>Hiro Gato - Japan swimsuit brand</p>
+                    <a href="https://hg-swimsuit.com/">
+                        <img src="website photos/Hiro Gato Link.png" alt="Hiro Gato">
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer>
         <p>&copy; 2024 Qetesh-Agdistis</p>
     </footer>
 </body>
