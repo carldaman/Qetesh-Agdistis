@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album 1</title>
+    <link rel="stylesheet" href="../styles.css">
+
+    <!-- Google Analytics script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FTEC93L1H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5FTEC93L1H');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .album-photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .album-photos img {
+            margin: 5px;
+            width: calc(20% - 10px); /* Adjust as necessary */
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .lightbox-nav button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="../home.html"><img src="../website photos/123.png" alt="Logo"></a>
+            </div>
+            <h1>Photo Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../albums.html">Albums</a></li>
+                    <li><a href="../videos.html">Videos</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../links.html">Links</a></li>
+                </ul>
+            </nav>
+            <div class="donate-button">
+                <a href="../donate.html" class="button">Donate</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="album">
+            <h2>Speedo Red Fastskin Swimsuit Album 1</h2>
+            <div class="album-photos" id="album-photos">
+                <!-- Photos will be loaded here by JavaScript -->
+            </div>
+            <div class="toolbar">
+                <button onclick="previousPage()">Previous</button>
+                <button onclick="nextPage()">Next</button>
+                <span id="page-indicator">Page 1 of 1</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Qetesh Agdistis</p>
+    </footer>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Enlarged Photo" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-nav">
+            <button onclick="prevImage()">Prev</button>
+            <button onclick="nextImage()">Next</button>      
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'https://i.ibb.co/71W5Kft/Speedo-Red-Fastskin-Swimsuit-S1-1.jpg',
+            'https://i.ibb.co/wh0ZzQq/Speedo-Red-Fastskin-Swimsuit-S1-2.jpg',
+            'https://i.ibb.co/P17Xc4M/Speedo-Red-Fastskin-Swimsuit-S1-3.jpg',
+            'https://i.ibb.co/fXs1d5B/Speedo-Red-Fastskin-Swimsuit-S1-4.jpg',
+            'https://i.ibb.co/qYRt4wD/Speedo-Red-Fastskin-Swimsuit-S1-5.jpg',
+            'https://i.ibb.co/X5mfLxk/Speedo-Red-Fastskin-Swimsuit-S1-6.jpg',
+            'https://i.ibb.co/MgkPS8V/Speedo-Red-Fastskin-Swimsuit-S1-7.jpg',
+            'https://i.ibb.co/ykLxGzg/Speedo-Red-Fastskin-Swimsuit-S1-8.jpg',
+            'https://i.ibb.co/8jkgQqg/Speedo-Red-Fastskin-Swimsuit-S1-9.jpg',
+            'https://i.ibb.co/xhrJkvh/Speedo-Red-Fastskin-Swimsuit-S1-10.jpg',
+            'https://i.ibb.co/TH0pLzK/Speedo-Red-Fastskin-Swimsuit-S1-11.jpg',
+            'https://i.ibb.co/9n09rvG/Speedo-Red-Fastskin-Swimsuit-S1-12.jpg',
+            'https://i.ibb.co/WHK9JCx/Speedo-Red-Fastskin-Swimsuit-S1-13.jpg',
+            'https://i.ibb.co/R9NDtVV/Speedo-Red-Fastskin-Swimsuit-S1-14.jpg',
+            'https://i.ibb.co/5nyCzc7/Speedo-Red-Fastskin-Swimsuit-S1-15.jpg',
+            'https://i.ibb.co/H7ycYNt/Speedo-Red-Fastskin-Swimsuit-S1-16.jpg',
+            'https://i.ibb.co/gPrhdK3/Speedo-Red-Fastskin-Swimsuit-S1-17.jpg',
+            'https://i.ibb.co/TBqYXGF/Speedo-Red-Fastskin-Swimsuit-S1-18.jpg',
+            'https://i.ibb.co/2yr4V5w/Speedo-Red-Fastskin-Swimsuit-S1-19.jpg'
+        ];
+
+        let currentPage = 1;
+        const photosPerPage = 5;
+        const totalPages = Math.ceil(photos.length / photosPerPage);
+
+        function displayPhotos() {
+            const albumPhotos = document.getElementById('album-photos');
+            albumPhotos.innerHTML = '';
+            const start = (currentPage - 1) * photosPerPage;
+            const end = start + photosPerPage;
+            const currentPhotos = photos.slice(start, end);
+
+            currentPhotos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('album-photo');
+                img.onclick = () => openLightbox(photos.indexOf(photo));
+                albumPhotos.appendChild(img);
+            });
+
+            // Update page indicator
+            document.getElementById('page-indicator').innerText = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[index];
+            lightbox.style.display = 'flex';
+            currentPhotoIndex = index;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function prevImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = photos[currentPhotoIndex];
+        }
+
+        function nextPage() {
+            if (currentPage * photosPerPage < photos.length) {
+                currentPage++;
+                displayPhotos();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPhotos();
+            }
+        }
+        
+        // Initial display
+        displayPhotos();
+    </script>
+</body>
+</html>
